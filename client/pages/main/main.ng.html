@@ -1,0 +1,13 @@
+<ion-view class="main-page">
+    <ion-nav-buttons side="right">
+        <button class="button button-icon" ng-click="addButton()">
+            <i class="icon ion-plus"></i>
+        </button>
+    </ion-nav-buttons>
+    <ion-content class="padding">
+        <div class="app-button-dashboard">
+            <ng-track-button ng-repeat="button in buttons" ng-model="button">
+            </ng-track-button>
+        </div>
+    </ion-content>
+</ion-view>

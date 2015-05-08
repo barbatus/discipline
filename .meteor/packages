@@ -1,0 +1,12 @@
+
+# Core
+meteor-platform
+less
+
+# Angular
+urigo:angular
+angularui:angular-ui-router
+
+# UI
+urigo:ionic
+ground:db
