@@ -1,10 +1,15 @@
 Meteor.startup(function() {
     if (!Buttons.find({}).count()) {
-        Buttons.insert({
-            title: 'btn1'
+        var btnId = Buttons.insert({
+            name: 'btn1'
         });
+
+        Clicks.insert({
+            buttonId: btnId
+        });
+
         Buttons.insert({
-            title: 'btn2'
+            name: 'btn2'
         });
     }
 });

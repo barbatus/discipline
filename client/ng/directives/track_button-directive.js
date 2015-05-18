@@ -7,10 +7,14 @@ app.controls.directive('ngTrackButton', ['$rootScope', function($rootScope) {
         },
         template: '\
             <div class="app-button-wrapper">\
-                <div class="app-button">\
-                    <input type="checkbox">\
+                <div class="app-button" ng-click="$ctrl.click()">\
+                    <input type="checkbox" ng-disabled="$ctrl.ngModel.clicked"\
+                        ng-checked="$ctrl.ngModel.clicked">\
                     <span class="button"></span>\
-                    <span class="label">{{$ctrl.$scope.ngModel.title}}</span>\
+                    <span class="label">{{$ctrl.ngModel.name}}</span>\
+                    <div ng-show="$ctrl.ngModel.count" class="count">\
+                        {{$ctrl.ngModel.count}}\
+                    </div>\
                 </div>\
             </div>\
         '
@@ -20,4 +24,9 @@ app.controls.directive('ngTrackButton', ['$rootScope', function($rootScope) {
 app.controls.controller('NgTrackButtonController', ['$rootScope', '$scope',
     function($rootScope, $scope) {
         this.$scope = $scope;
+        this.ngModel = $scope.ngModel;
+
+        this.click = function() {
+            $scope.ngModel.click();
+        };
     }]);

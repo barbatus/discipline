@@ -1,0 +1,20 @@
+<div class="modal">
+    <ion-header-bar class="bar bar-header bar-secondary">
+        <h1 class="title">New Button</h1>
+        <button class="button button-clear button-positive" ng-click="closeNewButton()">
+            Cancel
+        </button>
+    </ion-header-bar>
+    <ion-content has-header="true" scroll="false">
+        <div class="list">
+            <label class="item item-input">
+                <input type="text" placeholder="Name" ng-model="button.name">
+            </label>
+        </div>
+        <div class="padding">
+            <button class="button button-block button-positive" ng-click="addButton(button)">
+                Create Button
+            </button>
+        </div>
+    </ion-content>
+</div>
