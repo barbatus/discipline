@@ -2,7 +2,7 @@ if (Meteor.isClient) {
     Buttons = new Ground.Collection('buttons', {
         connection: null,
         transform: function(button) {
-            return new Button(button);
+            return BtnFactory.create(button);
         }
     });
 
@@ -56,6 +56,13 @@ depot = {
 
         getByButtonId: function(buttonId) {
             return Clicks.find({buttonId: buttonId});
+        }
+    },
+
+    consts: {
+        Buttons: {
+            MULTI_CLICK: 1,
+            ONCE_PER_DAY: 2
         }
     }
 };

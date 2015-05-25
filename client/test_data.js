@@ -1,7 +1,8 @@
 Meteor.startup(function() {
     if (!Buttons.find({}).count()) {
         var btnId = Buttons.insert({
-            name: 'btn1'
+            name: 'btn1',
+            type: depot.consts.Buttons.MULTI_CLICK
         });
 
         Clicks.insert({
@@ -9,7 +10,8 @@ Meteor.startup(function() {
         });
 
         Buttons.insert({
-            name: 'btn2'
+            name: 'btn2',
+            type: depot.consts.Buttons.ONCE_PER_DAY
         });
     }
 });

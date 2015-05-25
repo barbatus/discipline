@@ -13,11 +13,12 @@ app.pages.controller('MainCtrl', ['$scope', '$meteor', '$ionicModal',
             });
 
         $scope.showAddButton = function() {
-            $scope.button = Button.create();
+            $scope.btnData = {};
             $scope.taskModal.show();
         };
 
-        $scope.addButton = function(button) {
+        $scope.addButton = function() {
+            var button = MultiClickBtn.create($scope.btnData);
             button.save();
 
             $scope.taskModal.hide();
@@ -26,5 +27,4 @@ app.pages.controller('MainCtrl', ['$scope', '$meteor', '$ionicModal',
         $scope.closeNewButton = function() {
             $scope.taskModal.hide();
         };
-
     }]);

@@ -11,7 +11,7 @@ if (Meteor.isClient) {
         }
 
         get clicked() {
-            return depot.buttons.getCount(this._id) != 0;
+            return false;
         }
 
         click() {
@@ -24,25 +24,20 @@ if (Meteor.isClient) {
             if (this._id) {
                 depot.buttons.update(this._id, {
                     name: this.name,
-                    count: this.count
+                    count: this.count,
                 });
                 return;
             }
 
             depot.buttons.create({
                 name: this.name,
-                count: this.count
-            });
-        }
-
-        static create() {
-            return new Button({
-                count: 0
+                count: this.count,
+                type: this.type
             });
         }
     };
 
     // Exports
 
-    Button = Button_;
+    BasicBtn = Button_;
 }
