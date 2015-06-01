@@ -5,8 +5,10 @@ Meteor.startup(function() {
             type: depot.consts.Buttons.MULTI_CLICK
         });
 
+        var dateTime = moment.utc().subtract(10, 'minutes');
         Clicks.insert({
-            buttonId: btnId
+            buttonId: btnId,
+            dateTimeMs: dateTime.valueOf()
         });
 
         Buttons.insert({

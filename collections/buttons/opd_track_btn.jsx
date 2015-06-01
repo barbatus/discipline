@@ -10,7 +10,7 @@ if (Meteor.isClient) {
         }
 
         get clicked() {
-            return depot.buttons.getCount(this._id) != 0;
+            return this.count != 0;
         }
 
         static create(button) {

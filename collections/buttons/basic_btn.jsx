@@ -7,7 +7,7 @@ if (Meteor.isClient) {
         }
 
         get count() {
-            return depot.buttons.getCount(this._id);
+            return depot.buttons.getTodayCount(this._id);
         }
 
         get clicked() {

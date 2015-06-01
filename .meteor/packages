@@ -11,3 +11,6 @@ angularui:angular-ui-router
 urigo:ionic
 ground:db
 grigio:babel
+momentjs:moment
+mrt:later
+barbatus:angular-wizard

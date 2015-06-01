@@ -2,7 +2,7 @@ if (Meteor.isClient) {
     Buttons = new Ground.Collection('buttons', {
         connection: null,
         transform: function(button) {
-            return BtnFactory.create(button);
+            return BtnFactory.create(button.type, button);
         }
     });
 
@@ -20,6 +20,16 @@ depot = {
             return Buttons.find();
         },
 
+        getTypes: function() {
+            return [{
+                type: depot.consts.Buttons.MULTI_CLICK,
+                desc: 'Multi clicks per day button'
+            }, {
+                type: depot.consts.Buttons.ONCE_PER_DAY,
+                desc: 'One click per day button'
+            }];
+        },
+
         create: function(options) {
             Buttons.insert(options);
         },
@@ -30,23 +40,29 @@ depot = {
             });
         },
 
-        addClick: function(buttonId, options) {
-            depot.clicks.create(buttonId, options);
+        addClick: function(buttonId) {
+            var dateTimeMs = moment.utc().valueOf();
+            depot.clicks.create(buttonId, {
+                dateTimeMs: dateTimeMs
+            });
         },
 
-        getClicks: function(buttonId) {
-            return depot.clicks.getByButtonId(buttonId);
+        getClicks: function(buttonId, opt_dateMs) {
+            return depot.clicks.getByButtonId(buttonId, opt_dateMs);
         },
 
-        getCount: function(buttonId) {
-            return depot.buttons.getClicks(buttonId).count();
+        getTodayCount: function(buttonId, opt_dateMs) {
+            var now = moment();
+            var dateMs = moment.utc([now.year(), now.month(),
+                now.date() - 1]).valueOf();
+            return depot.buttons.getClicks(buttonId, dateMs).count();
         }
     },
 
     clicks: {
         create: function(buttonId, options) {
             Clicks.insert(_.extend({
-                buttonId: buttonId,
+                buttonId: buttonId
             }, options));
         },
 
@@ -54,8 +70,13 @@ depot = {
             return Clicks.find({_id: {$in: ids}});
         },
 
-        getByButtonId: function(buttonId) {
-            return Clicks.find({buttonId: buttonId});
+        getByButtonId: function(buttonId, opt_dateMs) {
+            var opt = {};
+            if (opt_dateMs) {
+                opt.dateTimeMs = {$gte: opt_dateMs};
+            }
+            opt.buttonId = buttonId;
+            return Clicks.find(opt);
         }
     },
 

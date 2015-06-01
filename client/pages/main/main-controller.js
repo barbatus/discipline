@@ -4,27 +4,34 @@ app.pages.controller('MainCtrl', ['$scope', '$meteor', '$ionicModal',
             return depot.buttons.get();
         }, false);
 
-        $ionicModal.fromTemplateUrl('client/views/buttons/new_button.ng.html',
-            function(modal) {
-                $scope.taskModal = modal;
-            }, {
+        $scope.showAddDlg = function() {
+            $ionicModal.fromTemplateUrl('client/views/buttons/new_button.ng.html', {
                 scope: $scope,
                 animation: 'slide-in-up'
+            }).then(function(modal) {
+                $scope.addModal = modal;
+                $scope.addModal.show();
             });
-
-        $scope.showAddButton = function() {
-            $scope.btnData = {};
-            $scope.taskModal.show();
         };
 
-        $scope.addButton = function() {
-            var button = MultiClickBtn.create($scope.btnData);
+        $scope.hideAddDlg = function() {
+            if ($scope.addModal) {
+                $scope.addModal.remove();
+            }
+        }
+
+        $scope.showAddButton = function() {
+            $scope.showAddDlg();
+        };
+
+        $scope.addButton = function(type, btnCfg) {
+            var button = BtnFactory.create(type, btnCfg);
             button.save();
 
-            $scope.taskModal.hide();
+            $scope.hideAddDlg();
         };
 
         $scope.closeNewButton = function() {
-            $scope.taskModal.hide();
+            $scope.hideAddDlg();
         };
     }]);

@@ -3,6 +3,7 @@ var app = angular.module('app', [
     'ui.router',
     'ionic',
     'app.pages',
+    'app.views',
     'app.controls']);
 
 app.config(['$urlRouterProvider', '$stateProvider', '$locationProvider',
@@ -16,6 +17,15 @@ app.config(['$urlRouterProvider', '$stateProvider', '$locationProvider',
         });
 
     $urlRouterProvider.otherwise('/main');
+}]);
+
+app.run(['$rootScope', function($rootScope) {
+    later.date.localTime();
+
+    later.setTimeout(function() {
+        $rootScope.$apply();
+    }, later.parse.text('at 12:00 pm'));
+
 }]);
 
 function onReady() {

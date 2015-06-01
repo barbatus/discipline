@@ -1,13 +1,13 @@
 if (Meteor.isClient) {
 
     class BtnFactory_ {
-        static create(button) {
-            if (button.type == depot.consts.Buttons.MULTI_CLICK) {
-                return MultiClickBtn.create(button);
+        static create(type, btnCfg) {
+            if (type == depot.consts.Buttons.MULTI_CLICK) {
+                return MultiClickBtn.create(btnCfg);
             }
 
-            if (button.type == depot.consts.Buttons.ONCE_PER_DAY) {
-                return OpdTrackBtn.create(button);
+            if (type == depot.consts.Buttons.ONCE_PER_DAY) {
+                return OpdTrackBtn.create(btnCfg);
             }
         }
     }
