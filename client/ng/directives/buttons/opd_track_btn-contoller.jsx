@@ -4,7 +4,7 @@ class OpdTrackBtnCtrl extends BasicBtnCtrl {
     }
 
     get enabled() {
-        return !this.model.clicked;
+        return super.enabled && !this.model.clicked;
     }
 
     get checked() {

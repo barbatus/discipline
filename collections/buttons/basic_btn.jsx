@@ -14,25 +14,22 @@ if (Meteor.isClient) {
             return false;
         }
 
-        click() {
-            if (!this.clicked) {
-                depot.buttons.addClick(this._id);
-            }
+        click(opt_value) {
+            depot.buttons.addClick(this._id, opt_value);
         }
 
         save() {
             if (this._id) {
                 depot.buttons.update(this._id, {
-                    name: this.name,
-                    count: this.count,
+                    name: this.name
                 });
                 return;
             }
 
             depot.buttons.create({
                 name: this.name,
-                count: this.count,
-                type: this.type
+                type: this.type,
+                value: 0
             });
         }
     };

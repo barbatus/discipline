@@ -1,5 +1,13 @@
+var BtnModes = {
+    CLICK_MODE: 1,
+    EDIT_MODE: 2,
+    CHART_MODE: 3
+};
+
 app.pages.controller('MainCtrl', ['$scope', '$meteor', '$ionicModal',
     function($scope, $meteor, $ionicModal) {
+        $scope.btnModes = BtnModes;
+
         $scope.buttons = $meteor.collection(function() {
             return depot.buttons.get();
         }, false);
@@ -34,4 +42,15 @@ app.pages.controller('MainCtrl', ['$scope', '$meteor', '$ionicModal',
         $scope.closeNewButton = function() {
             $scope.hideAddDlg();
         };
+
+        $scope.mode = BtnModes.CLICK_MODE;
+        $scope.setMode = function(mode) {
+            $scope.mode = mode;
+        }
+
+        $scope.$on('$bclick', function() {
+            if ($scope.mode == BtnModes.EDIT_MODE) {
+                $scope.showAddDlg();
+            }
+        });
     }]);

@@ -4,13 +4,19 @@ app.controls.directive('ngTrackButton', ['$rootScope', function($rootScope) {
         controllerAs: '$ctrl',
         require: 'ngModel',
         scope: {
-            ngModel: '='
+            ngModel: '=',
+            ngEditMode: '=?'
         },
         template: '\
-            <ng-multi-click-button ng-if="$ctrl.multiClick" ng-model="ngModel">\
+            <ng-multi-click-button ng-if="$ctrl.multiClick" ng-edit-mode="ngEditMode"\
+                ng-model="ngModel">\
             </ng-multi-click-button>\
-            <ng-opd-track-button ng-if="$ctrl.opdTrack" ng-model="ngModel">\
+            <ng-opd-track-button ng-if="$ctrl.opdTrack" ng-edit-mode="ngEditMode"\
+                ng-model="ngModel">\
             </ng-opd-track-button>\
+            <ng-input-track-button ng-if="$ctrl.inTrack" ng-edit-mode="ngEditMode"\
+                ng-model="ngModel">\
+            </ng-input-track-button>\
         '
     };
 }]);
@@ -26,6 +32,10 @@ class TrackBtnCtrl {
 
     get opdTrack() {
         return this.model.type == depot.consts.Buttons.ONCE_PER_DAY;
+    }
+
+    get inTrack() {
+        return this.model.type == depot.consts.Buttons.INPUT_TRACK;
     }
 }
 

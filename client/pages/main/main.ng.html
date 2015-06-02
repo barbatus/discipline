@@ -7,9 +7,23 @@
     <ion-content class="padding">
         <div class="app-button-dashboard">
             <div ng-repeat="button in buttons">
-                <ng-track-button ng-model="button">
+                <ng-track-button ng-edit-mode="mode != btnModes.CLICK_MODE" ng-model="button">
                 </ng-track-button>
             </div>
         </div>
     </ion-content>
+    <div class="tabs tabs-icon-only">
+        <a class="tab-item" ng-class="{active: mode == btnModes.CLICK_MODE}"
+            ng-click="setMode(btnModes.CLICK_MODE)">
+            <i class="icon ion-arrow-down-c"></i>
+        </a>
+        <a class="tab-item" ng-class="{active: mode == btnModes.EDIT_MODE}"
+            ng-click="setMode(btnModes.EDIT_MODE)">
+            <i class="icon ion-settings"></i>
+        </a>
+        <a class="tab-item" ng-class="{active: mode == btnModes.CHART_MODE}"
+            ng-click="setMode(btnModes.CHART_MODE)">
+            <i class="icon ion-arrow-graph-up-right"></i>
+        </a>
+    </div>
 </ion-view>

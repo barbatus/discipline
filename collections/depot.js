@@ -1,18 +1,26 @@
 if (Meteor.isClient) {
-    Buttons = new Ground.Collection('buttons', {
+    var buttons_ = new Meteor.Collection('buttons', {
         connection: null,
         transform: function(button) {
             return BtnFactory.create(button.type, button);
         }
     });
 
-    Clicks = new Ground.Collection('clicks', {
+    Buttons = new Ground.Collection(buttons_);
+
+    var clicks_ = new Meteor.Collection('clicks', {
         connection: null,
         transform: function(click) {
             return new Click(click);
         }
     });
+
+    Clicks = new Ground.Collection(clicks_);
 }
+
+checkNullOrType = function(value, type) {
+    check(value, Match.OneOf(null, Match.Optional(type)));
+};
 
 depot = {
     buttons: {
@@ -27,6 +35,9 @@ depot = {
             }, {
                 type: depot.consts.Buttons.ONCE_PER_DAY,
                 desc: 'One click per day button'
+            }, {
+                type: depot.consts.Buttons.INPUT_TRACK,
+                desc: 'Input and accumulate value'
             }];
         },
 
@@ -40,9 +51,12 @@ depot = {
             });
         },
 
-        addClick: function(buttonId) {
+        addClick: function(buttonId, opt_value) {
+            checkNullOrType(opt_value, Number);
+
             var dateTimeMs = moment.utc().valueOf();
             depot.clicks.create(buttonId, {
+                value: opt_value,
                 dateTimeMs: dateTimeMs
             });
         },
@@ -83,8 +97,8 @@ depot = {
     consts: {
         Buttons: {
             MULTI_CLICK: 1,
-            ONCE_PER_DAY: 2
+            ONCE_PER_DAY: 2,
+            INPUT_TRACK: 3
         }
     }
 };
-

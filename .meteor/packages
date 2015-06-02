@@ -2,6 +2,17 @@
 # Core
 meteor-platform
 less
+grigio:babel
+
+# Mobile
+mdg:geolocation
+
+# DB
+ground:db
+
+# Time
+momentjs:moment
+mrt:later
 
 # Angular
 urigo:angular
@@ -9,8 +20,4 @@ angularui:angular-ui-router
 
 # UI
 urigo:ionic
-ground:db
-grigio:babel
-momentjs:moment
-mrt:later
 barbatus:angular-wizard

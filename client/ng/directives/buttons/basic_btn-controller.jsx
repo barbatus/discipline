@@ -1,13 +1,28 @@
 class BasicBtnCtrl_ {
     constructor($scope) {
+        this.$scope = $scope;
         this._model = $scope.ngModel;
         this._checked = false;
+        this._editMode = false;
+
+        var self = this;
+        $scope.$watch('ngEditMode', function(editMode) {
+            self._editMode = editMode;
+        });
     }
 
-    click() {
+    onClick() {
+        this.$scope.$emit('$bclick', this.model._id);
+
+        if (this.enabled) {
+            this.click();
+        }
+    }
+
+    click(opt_value) {
         if (this.enabled) {
             this.checked = true;
-            this.model.click();
+            this.model.click(opt_value);
         }
     }
 
@@ -24,7 +39,11 @@ class BasicBtnCtrl_ {
     }
 
     get enabled() {
-        return true;
+        return !this.editMode;
+    }
+
+    get editMode() {
+        return this._editMode;
     }
 }
 

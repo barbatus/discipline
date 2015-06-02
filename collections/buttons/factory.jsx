@@ -9,6 +9,10 @@ if (Meteor.isClient) {
             if (type == depot.consts.Buttons.ONCE_PER_DAY) {
                 return OpdTrackBtn.create(btnCfg);
             }
+
+            if (type == depot.consts.Buttons.INPUT_TRACK) {
+                return InputTrackBtn.create(btnCfg);
+            }
         }
     }
 

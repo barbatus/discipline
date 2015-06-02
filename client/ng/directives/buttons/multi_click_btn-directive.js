@@ -4,13 +4,16 @@ app.controls.directive('ngMultiClickButton', ['$rootScope', function($rootScope)
         controllerAs: '$ctrl',
         require: 'ngModel',
         scope: {
-            ngModel: '='
+            ngModel: '=',
+            ngEditMode: '=?'
         },
         template: '\
             <div class="app-button-wrapper">\
                 <div class="app-button""\
-                    ng-click="$ctrl.click()">\
-                    <input type="checkbox" ng-checked="$ctrl.checked">\
+                    ng-click="$ctrl.onClick()">\
+                    <input type="checkbox" ng-checked="$ctrl.checked"\
+                        ng-if="!$ctrl.editMode"\
+                        ng-disabled="!$ctrl.enabled">\
                     <span class="button"></span>\
                     <span class="label">{{$ctrl.model.name}}</span>\
                     <div ng-show="$ctrl.model.count" class="count">\
