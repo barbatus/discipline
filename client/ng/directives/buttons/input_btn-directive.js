@@ -17,8 +17,9 @@ app.controls.directive('ngInputTrackButton', ['$rootScope', function($rootScope)
                     <input type="checkbox" ng-if="!$ctrl.editMode"\
                         ng-checked="$ctrl.checked"\
                         ng-disabled="!$ctrl.enabled">\
+                    <img ng-if="$ctrl.icon" src="{{$ctrl.icon}}">\
                     <span class="button"></span>\
-                    <span class="label">{{$ctrl.model.name}}</span>\
+                    <span ng-if="!$ctrl.icon" class="label">{{$ctrl.model.name}}</span>\
                 </div>\
             </div>\
         '

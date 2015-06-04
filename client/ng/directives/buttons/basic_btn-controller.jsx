@@ -45,6 +45,10 @@ class BasicBtnCtrl_ {
     get editMode() {
         return this._editMode;
     }
-}
+
+    get icon() {
+        return this.model.icon;
+    }
+};
 
 BasicBtnCtrl = BasicBtnCtrl_;

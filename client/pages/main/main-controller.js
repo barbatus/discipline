@@ -33,6 +33,7 @@ app.pages.controller('MainCtrl', ['$scope', '$meteor', '$ionicModal',
         };
 
         $scope.addButton = function(type, btnCfg) {
+            console.log(btnCfg);
             var button = BtnFactory.create(type, btnCfg);
             button.save();
 

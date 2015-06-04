@@ -11,7 +11,7 @@ class MultiClickBtnCtrl extends BasicBtnCtrl {
             self.checked = false;
         });
     }
-}
+};
 
 app.controls.controller('NgMultiClickButtonController', ['$scope', '$timeout',
     MultiClickBtnCtrl]);

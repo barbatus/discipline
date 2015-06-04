@@ -1,8 +1,13 @@
 Meteor.startup(function() {
     if (!Buttons.find({}).count()) {
+        var icon = Icons.findOne({});
+
+        console.log(icon);
+
         var btnId = Buttons.insert({
             name: 'btn1',
-            type: depot.consts.Buttons.MULTI_CLICK
+            type: depot.consts.Buttons.MULTI_CLICK,
+            iconId: icon._id
         });
 
         var dateTime = moment.utc().subtract(10, 'minutes');

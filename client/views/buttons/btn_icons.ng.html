@@ -1,9 +1,9 @@
 <div class="padding">
     <div class="app-button-dashboard">
-        <div class="app-button-icon" ng-repeat="btnType in btnTypes"
-            ng-click="chooseBtn(btnType.type)">
+        <div class="app-button-icon" ng-repeat="btnIcon in btnIcons"
+            ng-click="chooseIcon(btnIcon._id)">
             <input type="radio" name="type">
-            <img src="{{btnType.icon}}">
+            <img src="{{btnIcon.src}}">
         </div>
     </div>
     <button class="button button-block button-positive" wz-next>

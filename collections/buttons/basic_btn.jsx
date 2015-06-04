@@ -4,6 +4,7 @@ if (Meteor.isClient) {
         constructor(button) {
             this._id = button._id;
             this.name = button.name;
+            this.iconId = button.iconId;
         }
 
         get count() {
@@ -14,6 +15,11 @@ if (Meteor.isClient) {
             return false;
         }
 
+        get icon() {
+            var icon = depot.icons.getIcon(this.iconId);
+            return icon && icon.src;
+        }
+
         click(opt_value) {
             depot.buttons.addClick(this._id, opt_value);
         }
@@ -21,7 +27,8 @@ if (Meteor.isClient) {
         save() {
             if (this._id) {
                 depot.buttons.update(this._id, {
-                    name: this.name
+                    name: this.name,
+                    iconId: this.iconId
                 });
                 return;
             }
@@ -29,6 +36,7 @@ if (Meteor.isClient) {
             depot.buttons.create({
                 name: this.name,
                 type: this.type,
+                iconId: this.iconId,
                 value: 0
             });
         }
