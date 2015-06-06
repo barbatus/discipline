@@ -30,6 +30,10 @@ var lib = {
         return Buttons.find();
     },
 
+    getButton: function(btnId) {
+        return Buttons.findOne(btnId);
+    },
+
     getTypes: function() {
         return BtnTypes.find({});
     },

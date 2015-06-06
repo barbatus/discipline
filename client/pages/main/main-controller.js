@@ -4,54 +4,38 @@ var BtnModes = {
     CHART_MODE: 3
 };
 
-app.pages.controller('MainCtrl', ['$scope', '$meteor', '$ionicModal',
-    function($scope, $meteor, $ionicModal) {
+app.pages.controller('MainCtrl', ['$rootScope', '$scope', '$meteor', 'BtnDialog',
+    function($rootScope, $scope, $meteor, BtnDialog) {
         $scope.btnModes = BtnModes;
 
         $scope.buttons = $meteor.collection(function() {
             return depot.buttons.get();
         }, false);
 
-        $scope.showAddDlg = function() {
-            $ionicModal.fromTemplateUrl('client/views/buttons/new_button.ng.html', {
-                scope: $scope,
-                animation: 'slide-in-up'
-            }).then(function(modal) {
-                $scope.addModal = modal;
-                $scope.addModal.show();
+        $scope.showAddButton = function() {
+            var newBtnDlg = BtnDialog.newBtn();
+            newBtnDlg.open(function(type, btnCfg) {
+                var button = BtnFactory.create(type, btnCfg);
+                button.save();
             });
         };
 
-        $scope.hideAddDlg = function() {
-            if ($scope.addModal) {
-                $scope.addModal.remove();
-            }
-        }
-
-        $scope.showAddButton = function() {
-            $scope.showAddDlg();
-        };
-
-        $scope.addButton = function(type, btnCfg) {
-            console.log(btnCfg);
-            var button = BtnFactory.create(type, btnCfg);
-            button.save();
-
-            $scope.hideAddDlg();
-        };
-
-        $scope.closeNewButton = function() {
-            $scope.hideAddDlg();
+        $scope.showEditButton = function(button) {
+            var editBtnDlg = BtnDialog.editBtn();
+            editBtnDlg.open(button, function(button) {
+                button.save();
+            });
         };
 
         $scope.mode = BtnModes.CLICK_MODE;
         $scope.setMode = function(mode) {
             $scope.mode = mode;
-        }
+        };
 
-        $scope.$on('$bclick', function() {
+        $scope.$on('$bclick', function($event, btnId) {
             if ($scope.mode == BtnModes.EDIT_MODE) {
-                $scope.showAddDlg();
+                var button = depot.buttons.getButton(btnId);
+                $scope.showEditButton(button);
             }
         });
     }]);

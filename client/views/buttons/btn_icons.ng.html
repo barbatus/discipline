@@ -2,8 +2,8 @@
     <div class="app-button-dashboard">
         <div class="app-button-icon" ng-repeat="btnIcon in btnIcons"
             ng-click="chooseIcon(btnIcon._id)">
-            <input type="radio" name="type">
-            <img src="{{btnIcon.src}}">
+            <input type="radio" name="type" ng-checked="btnIcon._id == btnCfg.iconId">
+            <img src="{{btnIcon.src}}" class="icon">
         </div>
     </div>
     <button class="button button-block button-positive" wz-next>

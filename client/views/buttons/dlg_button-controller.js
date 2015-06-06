@@ -1,10 +1,5 @@
-app.views.controller('NewBtnCtrl', ['$scope', '$meteor', 'WizardHandler',
+app.views.controller('DlgBtnCtrl', ['$scope', '$meteor', 'WizardHandler',
     function($scope, $meteor, wizardHandler) {
-
-        $scope.btnType = null;
-        $scope.btnIcon = null;
-        $scope.btnConfig = {};
-
         $scope.btnTypes = $meteor.collection(function() {
             return depot.buttons.getTypes();
         }, false);
@@ -13,12 +8,12 @@ app.views.controller('NewBtnCtrl', ['$scope', '$meteor', 'WizardHandler',
             return depot.icons.get();
         }, false);
 
-        $scope.chooseBtn = function(type) {
-            $scope.btnType = type;
+        $scope.chooseIcon = function(iconId) {
+            $scope.btnCfg.iconId = iconId;
         };
 
-        $scope.chooseIcon = function(iconId) {
-            $scope.btnConfig.iconId = iconId;
+        $scope.chooseType = function(btnType) {
+            $scope.btnType = btnType;
         };
 
         $scope.backBtn = function() {
@@ -26,6 +21,8 @@ app.views.controller('NewBtnCtrl', ['$scope', '$meteor', 'WizardHandler',
         };
 
         $scope.hasBack = function() {
-            return wizardHandler.wizard().currentStepNumber() > 1;
+            if (wizardHandler.wizard().currentStepNumber) {
+                return wizardHandler.wizard().currentStepNumber() > 1;
+            }
         };
     }]);
