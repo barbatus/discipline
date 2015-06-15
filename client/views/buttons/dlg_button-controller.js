@@ -1,11 +1,8 @@
 app.views.controller('DlgBtnCtrl', ['$scope', '$meteor', 'WizardHandler',
     function($scope, $meteor, wizardHandler) {
+
         $scope.btnTypes = $meteor.collection(function() {
             return depot.buttons.getTypes();
-        }, false);
-
-        $scope.btnIcons = $meteor.collection(function() {
-            return depot.icons.get();
         }, false);
 
         $scope.chooseIcon = function(iconId) {

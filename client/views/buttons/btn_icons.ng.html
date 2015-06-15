@@ -1,7 +1,15 @@
-<div class="padding">
+<div class="padding" ng-controller="BtnIconsCtrl">
+    <label class="item item-input">
+        <input type="search" placeholder="Search icon you want" ng-model="searchQuery">
+    </label>
     <div class="app-button-dashboard">
-        <div class="app-button-icon" ng-repeat="btnIcon in btnIcons"
-            ng-click="chooseIcon(btnIcon._id)">
+        <div ng-if="selectedIcon" class="app-button-icon"
+            ng-click="chooseIcon(selectedIcon._id)">
+            <input type="radio" name="type" ng-checked="selectedIcon._id == btnCfg.iconId">
+            <img src="{{selectedIcon.src}}" class="icon">
+        </div>
+        <div ng-if="btnIcon._id != selectedIcon._id" class="app-button-icon"
+            ng-repeat="btnIcon in btnIcons" ng-click="chooseIcon(btnIcon._id)">
             <input type="radio" name="type" ng-checked="btnIcon._id == btnCfg.iconId">
             <img src="{{btnIcon.src}}" class="icon">
         </div>

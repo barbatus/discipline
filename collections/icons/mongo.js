@@ -13,6 +13,11 @@ var lib = {
 
     getIcon: function(iconId) {
         return Icons.findOne(iconId);
+    },
+
+    getByTag: function(tag) {
+        var regEx = tag ? '.*' + tag + '.*' : '.*';
+        return Icons.find({tags: {$regex: regEx}});
     }
 };
 
