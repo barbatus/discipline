@@ -2,8 +2,6 @@ Meteor.startup(function() {
     if (!Buttons.find({}).count()) {
         var icon = Icons.findOne({});
 
-        console.log(icon);
-
         var btnId = Buttons.insert({
             name: 'btn1',
             type: depot.consts.Buttons.MULTI_CLICK,

@@ -13,13 +13,15 @@ app.views.controller('BtnIconsCtrl', ['$scope', '$meteor', '$timeout',
         }, false);
 
         var tHandle;
-        $scope.$watch('searchQuery', function(searchQuery) {
-            if (tHandle) {
-                $timeout.cancel(tHandle);
+        $scope.$watch('searchQuery', function(newQuery, oldQuery) {
+            if (newQuery != oldQuery) {
+                if (tHandle) {
+                    $timeout.cancel(tHandle);
+                }
+                tHandle = $timeout(function() {
+                    $scope.getByTagQuery = newQuery;
+                }, 100);
             }
-            tHandle = $timeout(function() {
-                $scope.getByTagQuery = searchQuery;
-            }, 100);
         });
 
     }]);

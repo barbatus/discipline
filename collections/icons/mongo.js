@@ -16,8 +16,8 @@ var lib = {
     },
 
     getByTag: function(tag) {
-        var regEx = tag ? '.*' + tag + '.*' : '.*';
-        return Icons.find({tags: {$regex: regEx}});
+        var regEx = tag ? ('.*' + tag + '.*') : '.*';
+        return Icons.find({tags: {$regex: regEx, $options: 'i'}});
     }
 };
 

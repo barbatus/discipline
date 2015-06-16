@@ -1,6 +1,6 @@
-<div class="modal" ng-controller="controller">
+<div class="modal modal-edit-button" ng-controller="controller">
     <ion-header-bar class="bar bar-header bar-secondary">
-        <button ng-show="hasBack()" ng-click="backBtn()"
+        <button ng-show="hasBack" ng-click="backBtn()"
             class="ng-hide button icon-left ion-chevron-left button-clear button-dark">
         </button>
         <h1 class="title">Edit Button</h1>
@@ -8,14 +8,15 @@
             Cancel
         </button>
     </ion-header-bar>
-    <ion-content has-header="true" class="modal-edit-button" scroll="true">
-        <wizard on-finish="onFinish()">
-            <wz-step class="step1">
-                <ng-include src="'client/views/buttons/btn_icons.ng.html'"></ng-include>
-            </wz-step>
-            <wz-step class="step2">
-                <ng-include src="'client/views/buttons/btn_config.ng.html'"></ng-include>
-            </wz-step>
-        </wizard>
+    <ion-content has-header="true" scroll="true">
+        <ng-include ng-if="step == 0" class="icon-step" src="'client/views/buttons/btn_icons.ng.html'">
+        </ng-include>
+        <ng-include ng-if="step == 1" class="cfg-step" src="'client/views/buttons/btn_config.ng.html'">
+        </ng-include>
     </ion-content>
+    <ion-footer-bar class="padding">
+        <button class="button button-block button-positive" ng-click="nextBtn()">
+            {{isLast ? 'Update Button' : 'Next'}}
+        </button>
+    </ion-footer-bar>
 </div>

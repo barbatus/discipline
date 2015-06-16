@@ -28,12 +28,16 @@ class NewBtnDlg_ {
             return $controller;
         };
         this.button = {};
+        this.maxStep = 2;
      }
 
     open(onClose) {
-        this.$scope.onFinish = _.bind(this.onFinish_, this, onClose);
+        this.$scope.nextBtn = _.bind(this.nextBtn, this, onClose);
+        this.$scope.backBtn = _.bind(this.backBtn, this);
         this.$scope.onClose = _.bind(this.close, this);
         this.$scope.controller = this.$controller;
+        this.$scope.step = 0;
+        this.$scope.isLast = false;
         this.$scope.btnType = null;
         this.$scope.btnCfg = this.button;
         this.openWithScope(this.$scope);
@@ -45,6 +49,22 @@ class NewBtnDlg_ {
             this._modal = null;
             this.$scope = null;
         }
+    }
+
+    nextBtn(onClose) {
+        if (this.$scope.step == this.maxStep) {
+            this.onFinish_(onClose);
+            return;
+        }
+        this.$scope.step++;
+        this.$scope.hasBack = this.$scope.step > 0;
+        this.$scope.isLast = this.$scope.step == this.maxStep;
+    }
+
+    backBtn() {
+        this.$scope.step--;
+        this.$scope.hasBack = this.$scope.step > 0;
+        this.$scope.isLast = this.$scope.step == this.maxStep;
     }
 
     openWithScope($scope) {
@@ -63,7 +83,7 @@ class NewBtnDlg_ {
     }
 
     onFinish_(callback) {
-        callback(this.$scope.btnType, this.$scope.btnCfg);
+        callback(this.$scope.btnType.type, this.$scope.btnCfg);
         this.close();
     }
 };
@@ -71,6 +91,11 @@ class NewBtnDlg_ {
 NewBtnDlg = NewBtnDlg_;
 
 class EditBtnDlg_ extends NewBtnDlg {
+    constructor($scope, $ionicModal, $controller) {
+        super($scope, $ionicModal, $controller);
+        this.maxStep = 1;
+    }
+
     open(button, onClose) {
         this.button = button;
         super.open(onClose);

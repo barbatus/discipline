@@ -1,5 +1,5 @@
-app.views.controller('DlgBtnCtrl', ['$scope', '$meteor', 'WizardHandler',
-    function($scope, $meteor, wizardHandler) {
+app.views.controller('DlgBtnCtrl', ['$scope', '$meteor',
+    function($scope, $meteor) {
 
         $scope.btnTypes = $meteor.collection(function() {
             return depot.buttons.getTypes();
@@ -11,15 +11,5 @@ app.views.controller('DlgBtnCtrl', ['$scope', '$meteor', 'WizardHandler',
 
         $scope.chooseType = function(btnType) {
             $scope.btnType = btnType;
-        };
-
-        $scope.backBtn = function() {
-            wizardHandler.wizard().previous();
-        };
-
-        $scope.hasBack = function() {
-            if (wizardHandler.wizard().currentStepNumber) {
-                return wizardHandler.wizard().currentStepNumber() > 1;
-            }
         };
     }]);
