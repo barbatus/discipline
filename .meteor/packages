@@ -19,4 +19,6 @@ urigo:angular
 angularui:angular-ui-router
 
 # UI
-urigo:ionic
+barbatus:ionic-autocomplete
+barbatus:ionic
+underscorestring:underscore.string

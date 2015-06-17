@@ -13,6 +13,12 @@ if (Meteor.isClient) {
     });
 
     BtnTypes = new Ground.Collection(types_);
+
+    var groups_ = new Meteor.Collection('groups', {
+        connection: null
+    });
+
+    BtnGroups = new Ground.Collection(groups_);
 }
 
 Meteor.startup(function() {
@@ -38,7 +44,24 @@ var lib = {
         return BtnTypes.find({});
     },
 
+    getGroups: function() {
+        return BtnGroups.find({});
+    },
+
+    findGroups: function(name) {
+        return BtnGroups.find({name: {
+            $regex: ('.*' + name + '.*'),
+            $options: 'i'
+        }});
+    },
+
     create: function(options) {
+        if (options.groupName) {
+            var groups = lib.findGroups(options.groupName);
+            if (!groups.count()) {
+                lib.addGroup(options.groupName);
+            }
+        }
         Buttons.insert(options);
     },
 
@@ -56,6 +79,12 @@ var lib = {
             value: opt_value,
             dateTimeMs: dateTimeMs
         });
+    },
+
+    addGroup: function(name) {
+        check(name, String);
+
+        BtnGroups.insert({name: name.toLowerCase()});
     },
 
     getClicks: function(buttonId, opt_dateMs) {

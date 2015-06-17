@@ -52,6 +52,7 @@ class NewBtnDlg_ {
     }
 
     nextBtn(onClose) {
+        console.log('nextBtn');
         if (this.$scope.step == this.maxStep) {
             this.onFinish_(onClose);
             return;

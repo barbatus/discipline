@@ -5,6 +5,7 @@ if (Meteor.isClient) {
             this._id = button._id;
             this.name = button.name;
             this.iconId = button.iconId;
+            this.groupName = button.groupName;
         }
 
         get count() {
@@ -28,7 +29,8 @@ if (Meteor.isClient) {
             if (this._id) {
                 depot.buttons.update(this._id, {
                     name: this.name,
-                    iconId: this.iconId
+                    iconId: this.iconId,
+                    groupName: this.groupName
                 });
                 return;
             }
@@ -37,6 +39,7 @@ if (Meteor.isClient) {
                 name: this.name,
                 type: this.type,
                 iconId: this.iconId,
+                groupName: this.groupName,
                 value: 0
             });
         }

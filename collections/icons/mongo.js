@@ -15,7 +15,7 @@ var lib = {
         return Icons.findOne(iconId);
     },
 
-    getByTag: function(tag) {
+    findByTag: function(tag) {
         var regEx = tag ? ('.*' + tag + '.*') : '.*';
         return Icons.find({tags: {$regex: regEx, $options: 'i'}});
     }

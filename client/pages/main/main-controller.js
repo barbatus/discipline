@@ -8,6 +8,11 @@ app.pages.controller('MainCtrl', ['$rootScope', '$scope', '$meteor', 'BtnDialog'
     function($rootScope, $scope, $meteor, BtnDialog) {
         $scope.btnModes = BtnModes;
 
+        $scope.groupBy = 'groupName';
+        $scope.getGroupName = function(key) {
+            return key != 'undefined' ? s.capitalize(key) : 'Other';
+        };
+
         $scope.buttons = $meteor.collection(function() {
             return depot.buttons.get();
         }, false);

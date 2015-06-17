@@ -1,5 +1,10 @@
-<div class="list">
+<div class="list" ng-controller="BtnGroupsCtrl">
     <label class="item item-input">
         <input type="text" placeholder="Name" ng-model="btnCfg.name">
+    </label>
+    <label class="item item-input">
+        <ion-autocomplete placeholder="Group" ng-model="groupName" items-method="findGroups(query)"
+            items-clicked-method="chooseGroup(callback)" item-view-value-key="name">
+        </ion-autocomplete>
     </label>
 </div>

@@ -4,12 +4,16 @@
             <i class="icon ion-plus"></i>
         </button>
     </ion-nav-buttons>
-    <ion-content class="padding">
-        <div class="app-button-dashboard">
-            <div ng-repeat="button in buttons">
-                <ng-track-button ng-edit-mode="mode != btnModes.CLICK_MODE" ng-model="button">
-                </ng-track-button>
+    <ion-content>
+        <div ng-repeat="(key, value) in buttons | groupBy: groupBy">
+            <div ng-if="groupBy" class="button-group-name">
+                {{getGroupName(key)}}
             </div>
+           <div class="padding app-button-dashboard">
+                <ng-track-button ng-repeat="button in value"
+                    ng-edit-mode="mode != btnModes.CLICK_MODE" ng-model="button">
+                </ng-track-button>
+            </div> 
         </div>
     </ion-content>
     <div class="tabs tabs-icon-only">

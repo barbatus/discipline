@@ -8,7 +8,7 @@ app.views.controller('BtnIconsCtrl', ['$scope', '$meteor', '$timeout',
         }
 
         $scope.btnIcons = $meteor.collection(function() {
-            return depot.icons.getByTag(
+            return depot.icons.findByTag(
                 $scope.getReactively('getByTagQuery'));
         }, false);
 
