@@ -4,17 +4,30 @@
             <i class="icon ion-plus"></i>
         </button>
     </ion-nav-buttons>
-    <ion-content>
-        <div ng-repeat="(key, value) in buttons | groupBy: groupBy">
-            <div ng-if="groupBy" class="button-group-name">
-                {{getGroupName(key)}}
-            </div>
-           <div class="padding app-button-dashboard">
-                <ng-track-button ng-repeat="button in value"
-                    ng-edit-mode="mode != btnModes.CLICK_MODE" ng-model="button">
-                </ng-track-button>
-            </div> 
+    <ion-content scroll="false">
+        <div class="button-bar">
+            <a class="button btn-sort" ng-class="{active: groupBy}"
+                ng-click="groupBy = 'groupName'">
+                Sort by Groups
+            </a>
+            <a class="button btn-all" ng-class="{active: !groupBy}"
+                ng-click="groupBy = null">
+                All together
+            </a>
         </div>
+        <ion-scroll>
+            <div class="btn-group-divider"></div>
+            <div ng-repeat="(key, value) in buttons | groupBy: groupBy">
+                <div ng-if="groupBy" class="btn-group-name">
+                    {{getGroupName(key)}}
+                </div>
+                <div class="padding app-button-dashboard">
+                    <ng-track-button ng-repeat="button in value"
+                        ng-edit-mode="mode != btnModes.CLICK_MODE" ng-model="button">
+                    </ng-track-button>
+                </div>
+            </div>
+        </ion-scroll>
     </ion-content>
     <div class="tabs tabs-icon-only">
         <a class="tab-item" ng-class="{active: mode == btnModes.CLICK_MODE}"

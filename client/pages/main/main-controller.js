@@ -8,7 +8,7 @@ app.pages.controller('MainCtrl', ['$rootScope', '$scope', '$meteor', 'BtnDialog'
     function($rootScope, $scope, $meteor, BtnDialog) {
         $scope.btnModes = BtnModes;
 
-        $scope.groupBy = 'groupName';
+        $scope.groupBy = null;
         $scope.getGroupName = function(key) {
             return key != 'undefined' ? s.capitalize(key) : 'Other';
         };

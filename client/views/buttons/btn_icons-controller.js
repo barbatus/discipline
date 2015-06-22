@@ -3,10 +3,6 @@ app.views.controller('BtnIconsCtrl', ['$scope', '$meteor', '$timeout',
 
         $scope.getByTagQuery = '';
 
-        if ($scope.btnCfg.iconId) {
-            $scope.selectedIcon = depot.icons.getIcon($scope.btnCfg.iconId);
-        }
-
         $scope.btnIcons = $meteor.collection(function() {
             return depot.icons.findByTag(
                 $scope.getReactively('getByTagQuery'));
@@ -23,5 +19,4 @@ app.views.controller('BtnIconsCtrl', ['$scope', '$meteor', '$timeout',
                 }, 100);
             }
         });
-
     }]);

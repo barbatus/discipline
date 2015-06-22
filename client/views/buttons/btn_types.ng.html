@@ -1,13 +1,15 @@
 <div class="padding">
-    <div class="app-button-dashboard">
-        <div class="app-button-icon" ng-repeat="btnTypeItem in btnTypes"
-            ng-click="chooseType(btnTypeItem)">
-            <input type="radio" name="type" ng-checked="btnType.type == btnTypeItem.type"
-                ng-click="selBtnTypeItem = btnTypeItem">
-            <img src="{{btnTypeItem.icon}}" class="icon">
+    <div class="app-button-panel">
+        <div>
+            <div class="app-button-icon" ng-repeat="btnTypeItem in btnTypes"
+                ng-click="chooseType(btnTypeItem)">
+                <input type="radio" name="type" ng-checked="btnType.type == btnTypeItem.type"
+                    ng-click="selBtnTypeItem = btnTypeItem">
+                <img src="{{btnTypeItem.icon}}" class="icon">
+            </div>
         </div>
     </div>
-    <div class="type-desc" ng-show="btnType">
+    <div class="btn-type-text" ng-show="btnType">
         {{btnType.desc}}
     </div>
 </div>

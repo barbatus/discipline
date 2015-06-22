@@ -5,10 +5,6 @@ app.views.controller('DlgBtnCtrl', ['$scope', '$meteor',
             return depot.buttons.getTypes();
         }, false);
 
-        $scope.chooseIcon = function(iconId) {
-            $scope.btnCfg.iconId = iconId;
-        };
-
         $scope.chooseType = function(btnType) {
             $scope.btnType = btnType;
         };
