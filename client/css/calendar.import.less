@@ -1,0 +1,66 @@
+@color: rgba(0, 0, 0, 0.87);
+@out-color: rgba(0, 0, 0, 0.3);
+@day-color: rgba(0, 0, 0, 0.5);
+
+.app-click-calendar {
+    color: @color;
+
+    .header {
+        position: relative;
+        padding: 5px 0;
+        text-align: center;
+
+        h1 {
+            color: color;
+            font-size: 30px;
+            margin: 0;
+        }
+
+        button {
+            position: absolute;
+            top: 0;
+
+            &.left {
+                left: 0;
+            }
+
+            &.right {
+                right: 0;
+            }
+        }
+    }
+
+    .month {
+        padding-bottom: 5px;
+
+        .day {
+            display: inline-block;
+            padding: 5px;
+            text-align: center;
+            vertical-align: top;
+            position: relative;
+
+            &.out {
+                color: @out-color;
+            }
+
+            .day-name {
+                font-size: 10px;
+                margin-bottom: 5px;
+                text-transform: uppercase;
+                color: @day-color;
+                letter-spacing: .7px;
+            }
+
+            .day-number {
+                font-size: 25px;
+                letter-spacing: 1.5px;
+            }
+
+            &.clicked {
+                background-color: #ce93d8;
+                border-radius: 5px;
+            }
+        }
+    }
+}

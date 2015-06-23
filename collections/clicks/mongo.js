@@ -20,10 +20,13 @@ var lib = {
         return Clicks.find({_id: {$in: ids}});
     },
 
-    getByButtonId: function(buttonId, opt_dateMs) {
+    getByButtonId: function(buttonId, opt_minDateMs, opt_maxDateMs) {
         var opt = {};
-        if (opt_dateMs) {
-            opt.dateTimeMs = {$gte: opt_dateMs};
+        if (opt_minDateMs || opt_maxDateMs) {
+            opt.dateTimeMs = {
+                $gte: opt_minDateMs || 0,
+                $lte: opt_maxDateMs || Number.MAX_VALUE
+            };
         }
         opt.buttonId = buttonId;
         return Clicks.find(opt);

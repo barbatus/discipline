@@ -14,6 +14,11 @@ app.config(['$urlRouterProvider', '$stateProvider', '$locationProvider',
             url: '/main',
             templateUrl: 'client/pages/main/main.ng.html',
             controller: 'MainCtrl'
+        })
+        .state('stats', {
+            url: '/stats/:btnId',
+            templateUrl: 'client/pages/stats/stats.ng.html',
+            controller: 'StatsCtrl'
         });
 
     $urlRouterProvider.otherwise('/main');

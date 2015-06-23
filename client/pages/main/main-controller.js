@@ -1,11 +1,11 @@
 var BtnModes = {
     CLICK_MODE: 1,
     EDIT_MODE: 2,
-    CHART_MODE: 3
+    STATS_MODE: 3
 };
 
-app.pages.controller('MainCtrl', ['$rootScope', '$scope', '$meteor', 'BtnDialog',
-    function($rootScope, $scope, $meteor, BtnDialog) {
+app.pages.controller('MainCtrl', ['$rootScope', '$scope', '$meteor', '$state', 'BtnDialog',
+    function($rootScope, $scope, $meteor, $state, BtnDialog) {
         $scope.btnModes = BtnModes;
 
         $scope.groupBy = null;
@@ -41,6 +41,10 @@ app.pages.controller('MainCtrl', ['$rootScope', '$scope', '$meteor', 'BtnDialog'
             if ($scope.mode == BtnModes.EDIT_MODE) {
                 var button = depot.buttons.getButton(btnId);
                 $scope.showEditButton(button);
+            }
+            if ($scope.mode == BtnModes.STATS_MODE) {
+                console.log(btnId);
+                $state.go('stats', {btnId: btnId});
             }
         });
     }]);

@@ -87,11 +87,18 @@ var lib = {
         BtnGroups.insert({name: name.toLowerCase()});
     },
 
-    getClicks: function(buttonId, opt_dateMs) {
-        return depot.clicks.getByButtonId(buttonId, opt_dateMs);
+    getClicks: function(buttonId, opt_minDateMs, opt_maxDateMs) {
+        return depot.clicks.getByButtonId(buttonId, opt_minDateMs, opt_maxDateMs);
     },
 
-    getTodayCount: function(buttonId, opt_dateMs) {
+    getDayClicks: function(buttonId, dateMs) {
+        check(dateMs, Number);
+
+        var dayMs = moment(dateMs).utc().valueOf();
+        return depot.buttons.getClicks(buttonId, dayMs, dayMs + 24 * 60 * 60 * 1000);
+    },
+
+    getTodayCount: function(buttonId) {
         var now = moment();
         var dateMs = moment.utc([now.year(), now.month(),
             now.date() - 1]).valueOf();

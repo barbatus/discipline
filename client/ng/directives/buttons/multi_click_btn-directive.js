@@ -9,7 +9,7 @@ app.controls.directive('ngMultiClickButton', ['$rootScope', function($rootScope)
         },
         template: '\
             <div class="app-button-wrapper">\
-                <div class="app-button""\
+                <div class="app-button"\
                     ng-click="$ctrl.onClick()">\
                     <input type="checkbox" ng-checked="$ctrl.checked"\
                         ng-if="!$ctrl.editMode"\
