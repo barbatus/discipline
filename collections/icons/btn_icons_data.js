@@ -125,4 +125,4 @@ var icons = [{
     }
 ];
 
-addData('icons', icons);
+addData('btn_icons', icons);

@@ -20,5 +20,5 @@ angularui:angular-ui-router
 
 # UI
 barbatus:ionic-autocomplete
-barbatus:ionic
 underscorestring:underscore.string
+urigo:ionic

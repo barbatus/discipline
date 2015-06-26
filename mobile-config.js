@@ -5,4 +5,8 @@ App.info({
     author: 'Vivo Apps'
 });
 
-App.setPreference('AutoHideSplashScreen', 'true');
+App.icons({
+    'iphone': 'resources/icons/iphone.png',
+    'iphone_2x': 'resources/icons/iphone_2x.png',
+    'iphone_3x': 'resources/icons/iphone_3x.png'
+});

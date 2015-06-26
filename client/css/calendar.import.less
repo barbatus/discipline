@@ -33,9 +33,22 @@
     .month {
         padding-bottom: 5px;
 
+        .week:first-child {
+            .day {
+                .day-name {
+                    display: block;
+                    font-size: 10px;
+                    margin-bottom: 5px;
+                    text-transform: uppercase;
+                    color: @day-color;
+                    letter-spacing: .7px;
+                }
+            }
+        }
+
         .day {
             display: inline-block;
-            padding: 5px;
+            padding: 15px 5px;
             text-align: center;
             vertical-align: top;
             position: relative;
@@ -45,11 +58,7 @@
             }
 
             .day-name {
-                font-size: 10px;
-                margin-bottom: 5px;
-                text-transform: uppercase;
-                color: @day-color;
-                letter-spacing: .7px;
+                display: none;
             }
 
             .day-number {

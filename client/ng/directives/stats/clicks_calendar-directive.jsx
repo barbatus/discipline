@@ -15,7 +15,7 @@ app.controls.directive('ngClicksCalendar', ['$rootScope', function($rootScope) {
                     </button>\
                 </div>\
                 <div class="month">\
-                    <div class="week" ng-repeat="week in $ctrl.weeks">\
+                    <div ng-repeat="week in $ctrl.weeks" class="week">\
                         <div ng-repeat="day in week"\
                             ng-class="{out: day.isOut, clicked: day.clicked}"\
                             class="day" style="width:{{$ctrl.dayWidth}}px">\

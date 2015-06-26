@@ -31,6 +31,8 @@ app.run(['$rootScope', function($rootScope) {
         $rootScope.$apply();
     }, later.parse.text('at 12:00 pm'));
 
+    $rootScope.getAppIcon = client.getAppIcon;
+
 }]);
 
 function onReady() {

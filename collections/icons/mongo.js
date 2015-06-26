@@ -7,17 +7,42 @@ if (Meteor.isClient) {
 }
 
 var lib = {
+    createBtnIcon: function(icon) {
+        Icons.insert(_.extend(icon, {
+            type: consts.Icons.BTN_ICON
+        }));
+    },
+
+    createAppIcon: function(icon) {
+        Icons.insert(_.extend(icon, {
+            type: consts.Icons.APP_ICON
+        }));
+    },
+
     get: function() {
         return Icons.find();
     },
 
-    getIcon: function(iconId) {
-        return Icons.findOne(iconId);
+    getBtnIcon: function(iconId) {
+        return Icons.findOne({
+            _id: iconId,
+            type: consts.Icons.BTN_ICON
+        });
+    },
+
+    getAppIconByName: function(name) {
+        return Icons.findOne({
+            name: name,
+            type: consts.Icons.APP_ICON
+        });
     },
 
     findByTag: function(tag) {
         var regEx = tag ? ('.*' + tag + '.*') : '.*';
-        return Icons.find({tags: {$regex: regEx, $options: 'i'}});
+        return Icons.find({
+            tags: {$regex: regEx, $options: 'i'},
+            type: consts.Icons.BTN_ICON
+        });
     }
 };
 

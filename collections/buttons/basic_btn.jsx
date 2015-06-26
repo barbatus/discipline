@@ -17,7 +17,7 @@ if (Meteor.isClient) {
         }
 
         get icon() {
-            var icon = depot.icons.getIcon(this.iconId);
+            var icon = depot.icons.getBtnIcon(this.iconId);
             return icon && icon.src;
         }
 

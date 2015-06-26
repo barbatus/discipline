@@ -6,7 +6,7 @@ class IconsPanelCtrl {
         this.rowSize = 5;
 
         if ($scope.ngModel) {
-            $scope.initIcon = depot.icons.getIcon($scope.ngModel);
+            $scope.initIcon = depot.icons.getBtnIcon($scope.ngModel);
         }
 
         var self = this;
