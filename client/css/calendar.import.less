@@ -3,6 +3,7 @@
 @day-color: rgba(0, 0, 0, 0.5);
 
 .app-click-calendar {
+    padding: 0 5px;
     color: @color;
 
     .header {
@@ -33,42 +34,54 @@
     .month {
         padding-bottom: 5px;
 
-        .week:first-child {
-            .day {
-                .day-name {
-                    display: block;
-                    font-size: 10px;
-                    margin-bottom: 5px;
-                    text-transform: uppercase;
-                    color: @day-color;
-                    letter-spacing: .7px;
-                }
+        .day-name {
+            display: inline-block;
+            padding: 10px 5px;
+            margin-right: 2px;
+            font-size: 10px;
+            text-align: center;
+            vertical-align: top;
+            text-transform: uppercase;
+            color: @day-color;
+            letter-spacing: .7px;
+
+            &:last-child {
+                margin-right: 0px;
             }
         }
 
-        .day {
-            display: inline-block;
-            padding: 15px 5px;
-            text-align: center;
-            vertical-align: top;
-            position: relative;
+        .week {
+            margin-bottom: 2px;
 
-            &.out {
-                color: @out-color;
-            }
+            .day {
+                display: inline-block;
+                padding: 15px 5px;
+                margin-right: 2px;
+                text-align: center;
+                vertical-align: top;
+                position: relative;
 
-            .day-name {
-                display: none;
-            }
+                &:last-child {
+                    margin-right: 0px;
+                }
 
-            .day-number {
-                font-size: 25px;
-                letter-spacing: 1.5px;
-            }
+                &.out {
+                    color: @out-color;
+                }
 
-            &.clicked {
-                background-color: #ce93d8;
-                border-radius: 5px;
+                .day-name {
+                    display: none;
+                }
+
+                .day-number {
+                    font-size: 25px;
+                    letter-spacing: 1.5px;
+                }
+
+                &.clicked {
+                    background-color: #ce93d8;
+                    border-radius: 5px;
+                }
             }
         }
     }

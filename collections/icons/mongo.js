@@ -19,8 +19,10 @@ var lib = {
         }));
     },
 
-    get: function() {
-        return Icons.find();
+    getBtnIcons: function() {
+        return Icons.find({
+            type: consts.Icons.BTN_ICON
+        });
     },
 
     getBtnIcon: function(iconId) {

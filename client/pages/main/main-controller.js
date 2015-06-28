@@ -43,7 +43,6 @@ app.pages.controller('MainCtrl', ['$rootScope', '$scope', '$meteor', '$state', '
                 $scope.showEditButton(button);
             }
             if ($scope.mode == BtnModes.STATS_MODE) {
-                console.log(btnId);
                 $state.go('stats', {btnId: btnId});
             }
         });

@@ -15,11 +15,16 @@ app.controls.directive('ngClicksCalendar', ['$rootScope', function($rootScope) {
                     </button>\
                 </div>\
                 <div class="month">\
+                    <div class="week-days">\
+                        <div ng-repeat="day in $ctrl.days"\
+                            class="day-name" style="width:{{$ctrl.dayWidth}}px">\
+                            {{day}}\
+                        </div>\
+                    </div>\
                     <div ng-repeat="week in $ctrl.weeks" class="week">\
                         <div ng-repeat="day in week"\
                             ng-class="{out: day.isOut, clicked: day.clicked}"\
                             class="day" style="width:{{$ctrl.dayWidth}}px">\
-                            <div class="day-name">{{day.name}}</div>\
                             <div class="day-number">{{day.number}}</div>\
                         </div>\
                     </div>\
@@ -33,6 +38,12 @@ class ClicksCalendarCtrl {
     constructor($scope) {
         this.$scope = $scope;
         this.month = moment([moment().year(), moment().month(), 1]);
+        var start = moment().day(0);
+        this.days = [];
+        for (var i = 0; i < 7; i++) {
+            this.days.push(start.format('ddd'));
+            start.add(1, 'days');
+        }
         this.render(this.$scope.btnId, this.month);
     }
 
@@ -58,7 +69,6 @@ class ClicksCalendarCtrl {
             week.push({
                 isOut: true,
                 clicked: clicks.count(),
-                name: mDay.format('ddd'),
                 number: mDay.format('DD'),
             });
         }
@@ -73,7 +83,6 @@ class ClicksCalendarCtrl {
             week.push({
                 isOut: false,
                 clicked: clicks.count(),
-                name: mDay.format('ddd'),
                 number: mDay.format('DD')
             });
             mDay = mDate.add(1, 'days');
@@ -84,7 +93,6 @@ class ClicksCalendarCtrl {
             week.push({
                 isOut: true,
                 clicked: clicks.count(),
-                name: mDay.format('ddd'),
                 number: mDay.format('DD')
             });
             mDay = mDate.add(1, 'days');
@@ -107,7 +115,7 @@ class ClicksCalendarCtrl {
     }
 
     get dayWidth() {
-        var width = window.innerWidth / 7;
+        var width = (window.innerWidth - 22) / 7;
         return width;
     }
 };

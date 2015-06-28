@@ -11,7 +11,7 @@ if (Meteor.isClient) {
 
 var lib = {
     create: function(buttonId, options) {
-        Clicks.insert(_.extend({
+        return Clicks.insert(_.extend({
             buttonId: buttonId
         }, options));
     },

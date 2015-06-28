@@ -62,13 +62,7 @@ var lib = {
                 lib.addGroup(options.groupName);
             }
         }
-        Buttons.insert(options);
-    },
-
-    update: function(id, options) {
-        Buttons.update(id, {
-            $set: options
-        });
+        return Buttons.insert(options);
     },
 
     addClick: function(buttonId, opt_value) {
@@ -103,6 +97,12 @@ var lib = {
         var dateMs = moment.utc([now.year(), now.month(),
             now.date() - 1]).valueOf();
         return depot.buttons.getClicks(buttonId, dateMs).count();
+    },
+
+    update: function(id, options) {
+        Buttons.update(id, {
+            $set: options
+        });
     }
 };
 
