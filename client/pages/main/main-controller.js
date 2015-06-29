@@ -9,10 +9,6 @@ app.pages.controller('MainCtrl', ['$rootScope', '$scope', '$meteor', '$state', '
         $scope.btnModes = BtnModes;
 
         $scope.groupBy = null;
-        $scope.getGroupName = function(key) {
-            return key != 'undefined' ? s.capitalize(key) : 'Other';
-        };
-
         $scope.buttons = $meteor.collection(function() {
             return depot.buttons.get();
         }, false);

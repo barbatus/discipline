@@ -1,4 +1,4 @@
-.app-button-panel > div {
+.app-icons-panel > div {
     .flex-container();
     .flex-direction(row);
 }
@@ -11,6 +11,7 @@
     border-radius: 10px;
     text-align: center;
     position: relative;
+
     &:last-child {
         margin-right: 0px;
     }
@@ -39,6 +40,25 @@
 
         &:checked ~ img {
             opacity: 1;
+        }
+    }
+}
+
+.app-buttons-panel {
+    .buttons-group {
+        padding: 10px;
+
+        .buttons-row {
+            .flex-container();
+            .flex-direction(row);
+        }
+    }
+
+    ng-track-button {
+        margin: 0 5px 5px 0;
+
+        &:last-child {
+            margin-right: 0px;
         }
     }
 }

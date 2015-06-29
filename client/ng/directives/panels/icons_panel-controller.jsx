@@ -3,7 +3,11 @@ class IconsPanelCtrl {
         this.$scope = $scope;
         this.$timeout = $timeout;
         this.$element = $element;
-        this.rowSize = 5;
+        var iconSize = this.getIconSize();
+        this.iconStyle = {
+            width: iconSize[0] + 'px',
+            height: iconSize[1] + 'px'
+        };
 
         if ($scope.ngModel) {
             $scope.initIcon = depot.icons.getBtnIcon($scope.ngModel);
@@ -12,7 +16,6 @@ class IconsPanelCtrl {
         var self = this;
         $scope.$watch('btnIcons', function(newIcons, oldIcons) {
             self.btnIconsRows = self.splitRows(newIcons, $scope.initIcon);
-            self.setIconSize();
         }, true);
     }
 
@@ -20,6 +23,7 @@ class IconsPanelCtrl {
         var len = btnIcons.length;
         var iconRows = [];
         var iconRow = initIcon ? [initIcon] : [];
+        var rowSize = this.rowSize;
         var startInd = 0;
         if (initIcon) {
             for (var i = 0; i < len; i++) {
@@ -27,7 +31,7 @@ class IconsPanelCtrl {
                 if (initIcon._id != icon._id) {
                     iconRow.push(icon);
                 }
-                if (iconRow.length == this.rowSize) {
+                if (iconRow.length == rowSize) {
                     break;
                 }
             }
@@ -36,7 +40,7 @@ class IconsPanelCtrl {
             startInd = i + 1;
         }
         for (var i = startInd; i < len; i++) {
-            if (iconRow.length == this.rowSize) {
+            if (iconRow.length == rowSize) {
                 iconRows.push(iconRow);
                 iconRow = [];
             }
@@ -51,14 +55,16 @@ class IconsPanelCtrl {
         return iconRows;
     }
 
-    setIconSize() {
+    getIconSize() {
         var padding = 20;
-        var margin = (this.rowSize - 1) * 5;
-        var width = (window.innerWidth - padding - margin) / this.rowSize;
-        this.iconStyle = {
-            width: width + 'px',
-            height: width + 'px'
-        };
+        var rowSize = this.rowSize;
+        var margin = (rowSize - 1) * 5;
+        var width = (window.innerWidth - padding - margin) / rowSize;
+        return [width, width];
+    }
+
+    get rowRize() {
+        return 5;
     }
 
     chooseIcon(iconId) {

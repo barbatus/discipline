@@ -1,5 +1,6 @@
 client = {
     getAppIcon: function(name) {
-        return depot.icons.getAppIconByName(name).src;
+        var icon = depot.icons.getAppIconByName(name);
+        return icon && icon.src;
     }
 };

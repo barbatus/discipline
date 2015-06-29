@@ -21,16 +21,9 @@
         </div>
         <ion-scroll>
             <div class="body-border"></div>
-            <div ng-repeat="(key, value) in buttons | groupBy: groupBy">
-                <div ng-if="groupBy" class="btn-group-name">
-                    {{getGroupName(key)}}
-                </div>
-                <div class="padding app-button-dashboard">
-                    <ng-track-button ng-repeat="button in value"
-                        ng-edit-mode="mode != btnModes.CLICK_MODE" ng-model="button">
-                    </ng-track-button>
-                </div>
-            </div>
+            <ng-buttons-panel ng-buttons="buttons" ng-group-by="groupBy"
+                ng-edit-mode="mode != btnModes.CLICK_MODE">
+            </ng-buttons-panel>
         </ion-scroll>
     </ion-content>
     <div class="tabs tabs-icon-only">

@@ -1,6 +1,8 @@
 @color: rgba(0, 0, 0, 0.87);
 @out-color: rgba(0, 0, 0, 0.3);
 @day-color: rgba(0, 0, 0, 0.5);
+@clicks-bg: #ce93d8;
+@clicks-color: rgba(170, 0, 170, 0.26);
 
 .app-click-calendar {
     padding: 0 5px;
@@ -12,9 +14,14 @@
         text-align: center;
 
         h1 {
-            color: color;
+            color: @color;
             font-size: 30px;
             margin: 0;
+
+            .clicks {
+                font-size: 14px;
+                color: @clicks-bg;
+            }
         }
 
         button {
@@ -51,15 +58,17 @@
         }
 
         .week {
+            .flex-container();
+            .flex-direction(row);
             margin-bottom: 2px;
 
             .day {
-                display: inline-block;
                 padding: 15px 5px;
                 margin-right: 2px;
                 text-align: center;
                 vertical-align: top;
                 position: relative;
+                overflow: hidden;
 
                 &:last-child {
                     margin-right: 0px;
@@ -69,18 +78,25 @@
                     color: @out-color;
                 }
 
-                .day-name {
-                    display: none;
-                }
-
                 .day-number {
                     font-size: 25px;
                     letter-spacing: 1.5px;
                 }
 
                 &.clicked {
-                    background-color: #ce93d8;
+                    background-color: @clicks-bg;
                     border-radius: 5px;
+                }
+
+                .day-clicks {
+                    position: absolute;
+                    font-size: 50px;
+                    line-height: 50px;
+                    color: @clicks-color;
+                    width: 200%;
+                    height: 100%;
+                    top: 0;
+                    left: -50%;
                 }
             }
         }

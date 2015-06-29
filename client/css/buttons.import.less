@@ -1,9 +1,20 @@
 @import "utils.import.less";
 
+ng-track-button {
+    display: block;
+}
+
+ng-multi-click-button,
+ng-opd-track-button,
+ng-input-track-button {
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+
 .app-button-wrapper {
-    height: 68px;
-    width: 68px;
-    margin: 0 5px 5px 0;
+    height: 100%;
+    width: 100%;
 
     .app-button {
         .scale(0.5);
@@ -11,8 +22,8 @@
         border-radius: 8px;
         background: #ccd0d4;
         position: relative;
-        height: 140px;
-        width: 140px;
+        height: -webkit-calc(100% * 2);
+        width: -webkit-calc(100% * 2);
 
         &:before {
             border-radius: 118.3px;
@@ -130,7 +141,7 @@
             }
         }
 
-        img {
+        .icon {
             position: absolute;
             left: 50%;
             top: 50%;
@@ -139,6 +150,7 @@
             width: 64px;
             height: 64px;
             z-index: 1;
+            background-size: cover;
         }
     }
 }
