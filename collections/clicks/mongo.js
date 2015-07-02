@@ -29,7 +29,7 @@ var lib = {
             };
         }
         opt.buttonId = buttonId;
-        return Clicks.find(opt);
+        return Clicks.find(opt, {sort: {dateTimeMs: -1}});
     }
 };
 

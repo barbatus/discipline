@@ -1,0 +1,16 @@
+<ion-view class="alerts-page">
+    <ion-content scroll="true">
+        <div class="body-border"></div>
+        <ul class="list alert-list">
+            <li class="item item-icon-left" ng-repeat="alert in alerts">
+                <div ng-if="isOutdated(alert)">
+                    <img class="icon" src="{{alert.button.icon}}">
+                    <div class="msg">
+                        <div>Usually you click this button every {{alert.period}} days</div>
+                        <div>Day of last click was {{alert.lastDateStr}}</div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </ion-content>
+</ion-view>

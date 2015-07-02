@@ -32,8 +32,14 @@ Meteor.startup(function() {
 });
 
 var lib = {
-    get: function(ids) {
-        return Buttons.find();
+    get: function(opt_type) {
+        checkNullOrType(opt_type, Array);
+
+        var opts = {};
+        if (opt_type) {
+            opts.type = {$in: opt_type};
+        }
+        return Buttons.find(opts);
     },
 
     getButton: function(btnId) {
@@ -83,6 +89,12 @@ var lib = {
 
     getClicks: function(buttonId, opt_minDateMs, opt_maxDateMs) {
         return depot.clicks.getByButtonId(buttonId, opt_minDateMs, opt_maxDateMs);
+    },
+
+    getLastClick: function(buttonId) {
+        return Clicks.findOne({buttonId: buttonId}, {
+            sort: {dateTimeMs: -1}
+        });
     },
 
     getDayClicks: function(buttonId, dateMs) {

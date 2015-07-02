@@ -8,5 +8,9 @@ consts = {
     Icons: {
         BTN_ICON: 1,
         APP_ICON: 2
+    },
+
+    Alerts: {
+        OUTDATED: 1
     }
 };

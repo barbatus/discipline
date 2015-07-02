@@ -43,6 +43,16 @@ if (Meteor.isClient) {
                 value: 0
             });
         }
+
+        getClicks(startDateMs) {
+            check(startDateMs, Number);
+
+            return depot.buttons.getClicks(this._id, startDateMs);
+        }
+
+        get lastClick() {
+            return depot.buttons.getLastClick(this._id);
+        }
     };
 
     // Exports

@@ -121,13 +121,15 @@ class ClicksCalendarCtrl {
     }
 
     getDayClicks(btnId, mDay) {
-        var clicks = depot.buttons.getDayClicks(btnId, mDay.valueOf());
+        var mUtcDay = mDay.clone().utc();
+        var clicks = depot.buttons.getDayClicks(btnId, mUtcDay.valueOf());
         return clicks;
     }
 
     getMonthClicks(btnId, mMonth) {
-        var startMs = mMonth.valueOf();
-        var endMs = mMonth.clone().add(1, 'months').subtract(1, 'days').valueOf();
+        var mUtcMonth = mMonth.clone().utc();
+        var startMs = mUtcMonth.valueOf();
+        var endMs = mUtcMonth.add(1, 'months').subtract(1, 'days').valueOf();
         return depot.buttons.getClicks(btnId, startMs, endMs).count();
     }
 

@@ -10,26 +10,41 @@ app.config(['$urlRouterProvider', '$stateProvider', '$locationProvider',
     function($urlRouterProvider, $stateProvider, $locationProvider) {
 
     $stateProvider
-        .state('main', {
+        .state('app', {
+            url: '/app',
+            abstract: true,
+            templateUrl: 'client/main.ng.html'
+        })
+        .state('app.main', {
             url: '/main',
             templateUrl: 'client/pages/main/main.ng.html',
             controller: 'MainCtrl'
         })
-        .state('stats', {
+        .state('app.stats', {
             url: '/stats/:btnId',
             templateUrl: 'client/pages/stats/stats.ng.html',
             controller: 'StatsCtrl'
+        })
+        .state('app.alerts', {
+            url: '/alerts',
+            templateUrl: 'client/pages/alerts/alerts.ng.html',
+            controller: 'AlertsCtrl'
         });
 
-    $urlRouterProvider.otherwise('/main');
+    $urlRouterProvider.otherwise('/app/main');
 }]);
 
 app.run(['$rootScope', function($rootScope) {
-    later.date.localTime();
 
-    later.setTimeout(function() {
+    var runner = new TaskRunner();
+    runner.runAtNight(function() {
         $rootScope.$apply();
-    }, later.parse.text('at 12:00 pm'));
+    });
+
+    var task = new OutAlertTask();
+    runner.runEveryMins(function() {
+        task.run();
+    }, 1);
 
     $rootScope.getAppIcon = client.getAppIcon;
 

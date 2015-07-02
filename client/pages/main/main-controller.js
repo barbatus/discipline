@@ -4,8 +4,9 @@ var BtnModes = {
     STATS_MODE: 3
 };
 
-app.pages.controller('MainCtrl', ['$rootScope', '$scope', '$meteor', '$state', 'BtnDialog',
-    function($rootScope, $scope, $meteor, $state, BtnDialog) {
+app.pages.controller('MainCtrl', ['$rootScope', '$scope', '$timeout', '$meteor',
+    '$state', 'BtnDialog',
+    function($rootScope, $scope, $timeout, $meteor, $state, BtnDialog) {
         $scope.btnModes = BtnModes;
 
         $scope.groupBy = null;
@@ -39,7 +40,11 @@ app.pages.controller('MainCtrl', ['$rootScope', '$scope', '$meteor', '$state', '
                 $scope.showEditButton(button);
             }
             if ($scope.mode == BtnModes.STATS_MODE) {
-                $state.go('stats', {btnId: btnId});
+                $state.go('app.stats', {btnId: btnId});
             }
         });
+
+        $scope.newAlerts = $meteor.collection(function() {
+            return depot.alerts.get(false);
+        }, false);
     }]);
