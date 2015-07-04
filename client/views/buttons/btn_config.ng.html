@@ -1,10 +1,25 @@
 <div class="list" ng-controller="BtnGroupsCtrl">
-    <label class="item item-input">
-        <input type="text" placeholder="Name" ng-model="btnCfg.name">
-    </label>
-    <label class="item item-input">
-        <ion-autocomplete placeholder="Group" ng-model="groupName" items-method="findGroups(query)"
-            items-clicked-method="chooseGroup(callback)" item-view-value-key="name">
-        </ion-autocomplete>
-    </label>
+    <div class="item item-input-inset">
+        <label class="item-input-wrapper">
+          <input type="text" placeholder="Name" ng-model="btnCfg.name">
+        </label>
+    </div>
+    <div class="item item-input-inset">
+        <label class="item-input-wrapper">
+            <ion-autocomplete placeholder="Group" ng-model="groupName" items-method="findGroups(query)"
+                items-clicked-method="chooseGroup(callback)" item-view-value-key="name">
+            </ion-autocomplete>
+        </label>
+    </div>
+    <div class="item item-input-inset">
+        <label class="item-input-wrapper">
+            <textarea placeholder="Note" ng-model="btnCfg.note"></textarea>
+        </label>
+    </div>
+    <li class="item item-checkbox">
+        <label class="checkbox">
+            <input type="checkbox" ng-model="btnBits.SEND_ALERTS">
+        </label>
+        Send Notifications
+    </li>
 </div>

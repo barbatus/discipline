@@ -40,6 +40,7 @@ class NewBtnDlg_ {
         this.$scope.isLast = false;
         this.$scope.btnType = null;
         this.$scope.btnCfg = this.button;
+        this.$scope.btnBits = this.button.bits || {};
         this.openWithScope(this.$scope);
     }
 
@@ -84,7 +85,9 @@ class NewBtnDlg_ {
     }
 
     onFinish_(callback) {
-        callback(this.$scope.btnType.type, this.$scope.btnCfg);
+        var bitsArray = BasicBtn.getBitsArray(this.$scope.btnBits);
+        callback(this.$scope.btnType.type,
+            this.$scope.btnCfg, bitsArray);
         this.close();
     }
 };

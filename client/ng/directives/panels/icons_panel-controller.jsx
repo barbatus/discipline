@@ -63,7 +63,7 @@ class IconsPanelCtrl {
         return [width, width];
     }
 
-    get rowRize() {
+    get rowSize() {
         return 5;
     }
 

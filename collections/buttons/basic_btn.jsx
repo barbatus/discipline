@@ -6,6 +6,8 @@ if (Meteor.isClient) {
             this.name = button.name;
             this.iconId = button.iconId;
             this.groupName = button.groupName;
+            this.note = button.note;
+            this.bits_ = BasicBtn.getBitsObj(button.bits);
         }
 
         get count() {
@@ -21,6 +23,10 @@ if (Meteor.isClient) {
             return icon && icon.src;
         }
 
+        get bits() {
+            return this.bits_;
+        }
+
         click(opt_value) {
             depot.buttons.addClick(this._id, opt_value);
         }
@@ -30,7 +36,9 @@ if (Meteor.isClient) {
                 depot.buttons.update(this._id, {
                     name: this.name,
                     iconId: this.iconId,
-                    groupName: this.groupName
+                    groupName: this.groupName,
+                    note: this.note,
+                    bits: BasicBtn.getBitsArray(this.bits_)
                 });
                 return;
             }
@@ -40,6 +48,8 @@ if (Meteor.isClient) {
                 type: this.type,
                 iconId: this.iconId,
                 groupName: this.groupName,
+                note: this.note,
+                bits: BasicBtn.getBitsArray(this.bits_),
                 value: 0
             });
         }
@@ -52,6 +62,32 @@ if (Meteor.isClient) {
 
         get lastClick() {
             return depot.buttons.getLastClick(this._id);
+        }
+
+        static getBitsArray(bitsObj) {
+            check(bitsObj, Object);
+
+            var bits = [];
+            for (var bit in depot.consts.BtnBits) {
+                if (bitsObj[bit]) {
+                    bits.push(depot.consts.BtnBits[bit]);
+                }
+            }
+            return bits;
+        }
+
+        static getBitsObj(bits) {
+            check(bits, Array);
+
+            var bitsObj = {};
+            for (var i = 0; i < bits.length; i++) {
+                for (var bit in depot.consts.BtnBits) {
+                    if (bits[i] == depot.consts.BtnBits[bit]) {
+                        bitsObj[bit] = true;
+                    }
+                }
+            }
+            return bitsObj;
         }
     };
 

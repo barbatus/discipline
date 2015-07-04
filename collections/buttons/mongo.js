@@ -2,7 +2,7 @@ if (Meteor.isClient) {
     var buttons_ = new Meteor.Collection('buttons', {
         connection: null,
         transform: function(button) {
-            return BtnFactory.create(button.type, button);
+            return BtnFactory.create(button.type, button, button.bits);
         }
     });
 
@@ -32,12 +32,15 @@ Meteor.startup(function() {
 });
 
 var lib = {
-    get: function(opt_type) {
+    get: function(opt_type, opt_bit) {
         checkNullOrType(opt_type, Array);
 
         var opts = {};
         if (opt_type) {
             opts.type = {$in: opt_type};
+        }
+        if (opt_bit) {
+            opts.bits = {$all: opt_bit};
         }
         return Buttons.find(opts);
     },

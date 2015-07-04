@@ -1,7 +1,7 @@
 Meteor.startup(function() {
 
     function insertBtn(name, type, groupName, withIcon, nClicks, opt_daysPeriod,
-        opt_clickForToday) {
+        opt_clickForToday, opt_sendAlerts) {
         var icon = null;
         if (withIcon) {
            var icons = depot.icons.getBtnIcons().fetch();
@@ -9,11 +9,14 @@ Meteor.startup(function() {
            icon = icons[ind];
         }
 
+        var bits = opt_sendAlerts ? [consts.BtnBits.SEND_ALERTS] : [];
+
         var btnId = depot.buttons.create({
             name: name,
             type: type,
             iconId: withIcon ? icon._id : null,
-            groupName: groupName
+            groupName: groupName,
+            bits: bits
         });
 
         var oldClicks = opt_clickForToday ? nClicks - 1 : nClicks;
@@ -49,7 +52,7 @@ Meteor.startup(function() {
 
         insertBtn('btn1', depot.consts.Buttons.MULTI_CLICK, 'sport', true, 5, 30, true);
         insertBtn('btn2', depot.consts.Buttons.MULTI_CLICK, 'sport', true, 10, 30, false);
-        insertBtn('btn3', depot.consts.Buttons.MULTI_CLICK, 'sport', true, 15, 180, false);
+        insertBtn('btn3', depot.consts.Buttons.MULTI_CLICK, 'sport', true, 15, 180, false, true);
         insertBtn('btn4', depot.consts.Buttons.ONCE_PER_DAY, null, true, 1, 30, true);
         insertBtn('btn5', depot.consts.Buttons.ONCE_PER_DAY, 'food', false, 0);
     }

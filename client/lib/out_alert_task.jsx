@@ -1,7 +1,7 @@
 class OutAlertTask_ {
     run() {
         var buttons = depot.buttons.get([consts.Buttons.MULTI_CLICK,
-            consts.Buttons.ONCE_PER_DAY]);
+            consts.Buttons.ONCE_PER_DAY], [consts.BtnBits.SEND_ALERTS]);
         var self = this;
         buttons.forEach(function(button) {
             var lastAlert = depot.alerts.getAlert(button._id,

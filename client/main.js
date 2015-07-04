@@ -44,7 +44,7 @@ app.run(['$rootScope', function($rootScope) {
     var task = new OutAlertTask();
     runner.runEveryMins(function() {
         task.run();
-    }, 1);
+    }, 15);
 
     $rootScope.getAppIcon = client.getAppIcon;
 

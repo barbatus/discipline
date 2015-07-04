@@ -5,6 +5,10 @@ consts = {
         INPUT_TRACK: 3
     },
 
+    BtnBits: {
+        SEND_ALERTS: 1
+    },
+
     Icons: {
         BTN_ICON: 1,
         APP_ICON: 2

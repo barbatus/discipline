@@ -16,8 +16,8 @@ app.pages.controller('MainCtrl', ['$rootScope', '$scope', '$timeout', '$meteor',
 
         $scope.showAddButton = function() {
             var newBtnDlg = BtnDialog.newBtn();
-            newBtnDlg.open(function(type, btnCfg) {
-                var button = BtnFactory.create(type, btnCfg);
+            newBtnDlg.open(function(type, btnCfg, btnBits) {
+                var button = BtnFactory.create(type, btnCfg, btnBits);
                 button.save();
             });
         };

@@ -1,7 +1,9 @@
 if (Meteor.isClient) {
 
     class BtnFactory_ {
-        static create(type, btnCfg) {
+        static create(type, btnCfg, btnBits) {
+            btnCfg.bits = btnBits;
+
             if (type == depot.consts.Buttons.MULTI_CLICK) {
                 return MultiClickBtn.create(btnCfg);
             }
