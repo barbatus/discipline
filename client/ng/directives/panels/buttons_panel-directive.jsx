@@ -15,7 +15,7 @@ app.controls.directive('ngButtonsPanel', ['$rootScope', function($rootScope) {
                 </div>\
                 <div class="buttons-group">\
                     <div class="buttons-row" ng-repeat="btnRow in btnGroup">\
-                        <ng-track-button ng-style="$ctrl.btnStyle"\
+                        <ng-track-button ng-width="$ctrl.btnWidth"\
                             ng-repeat="button in btnRow"\
                             ng-edit-mode="ngEditMode" ng-model="button">\
                         </ng-track-button>\
@@ -29,10 +29,7 @@ app.controls.directive('ngButtonsPanel', ['$rootScope', function($rootScope) {
 class BtnsPanelCtrl {
     constructor($scope, $meteor, $timeout) {
         var btnSize = this.getBtnSize();
-        this.btnStyle = {
-            width: btnSize[0] + 'px',
-            height: btnSize[1] + 'px'
-        };
+        this.btnWidth = btnSize[0];
 
         var self = this;
         $scope.$watch('ngGroupBy', function(groupBy) {

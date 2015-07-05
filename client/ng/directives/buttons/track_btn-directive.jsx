@@ -5,18 +5,24 @@ app.controls.directive('ngTrackButton', ['$rootScope', function($rootScope) {
         require: 'ngModel',
         scope: {
             ngModel: '=',
-            ngEditMode: '=?'
+            ngEditMode: '=?',
+            ngWidth: '=?'
         },
         template: '\
-            <ng-multi-click-button ng-if="$ctrl.multiClick" ng-edit-mode="ngEditMode"\
-                ng-model="ngModel">\
+            <ng-multi-click-button ng-if="$ctrl.multiClick" ng-style="$ctrl.btnStyle"\
+                ng-edit-mode="ngEditMode" ng-model="ngModel">\
             </ng-multi-click-button>\
-            <ng-opd-track-button ng-if="$ctrl.opdTrack" ng-edit-mode="ngEditMode"\
-                ng-model="ngModel">\
+            <ng-opd-track-button ng-if="$ctrl.opdTrack" ng-style="$ctrl.btnStyle"\
+                ng-edit-mode="ngEditMode" ng-model="ngModel">\
             </ng-opd-track-button>\
-            <ng-input-track-button ng-if="$ctrl.inTrack" ng-edit-mode="ngEditMode"\
-                ng-model="ngModel">\
+            <ng-input-track-button ng-if="$ctrl.inTrack" ng-style="$ctrl.btnStyle"\
+                ng-edit-mode="ngEditMode" ng-model="ngModel">\
             </ng-input-track-button>\
+            <div class="app-button-title" ng-if="$ctrl.model.icon && $ctrl.model.name">\
+                <div class="backbox">\
+                    {{$ctrl.model.name}}\
+                </div>\
+            </div>\
         '
     };
 }]);
@@ -24,6 +30,10 @@ app.controls.directive('ngTrackButton', ['$rootScope', function($rootScope) {
 class TrackBtnCtrl {
     constructor($scope) {
         this.model = $scope.ngModel;
+        this.btnStyle = {
+            width: $scope.ngWidth + 'px',
+            height: $scope.ngWidth + 'px'
+        };
     }
 
     get multiClick() {

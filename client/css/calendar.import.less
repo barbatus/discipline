@@ -63,7 +63,7 @@
             margin-bottom: 2px;
 
             .day {
-                padding: 15px 5px;
+                padding: 10px 5px;
                 margin-right: 2px;
                 text-align: center;
                 vertical-align: top;
@@ -81,6 +81,7 @@
                 .day-number {
                     font-size: 25px;
                     letter-spacing: 1.5px;
+                    padding-top: 2px;
                 }
 
                 &.clicked {
@@ -90,13 +91,10 @@
 
                 .day-clicks {
                     position: absolute;
-                    font-size: 50px;
-                    line-height: 50px;
+                    font-size: 15px;
                     color: @clicks-color;
-                    width: 200%;
-                    height: 100%;
-                    top: 0;
-                    left: -50%;
+                    top: -2px;
+                    right: 2px;
                 }
             }
         }
