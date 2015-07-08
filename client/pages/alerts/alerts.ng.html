@@ -7,7 +7,7 @@
                     <img class="icon" src="{{alert.button.icon}}">
                     <div class="msg">
                         <div>Usually you click this button every {{alert.period}} days</div>
-                        <div>Day of last click was {{alert.lastDateStr}}</div>
+                        <div>Last click was {{utils.getDayDiff(alert.lastClickTimeMs)}} days ago</div>
                     </div>
                 </div>
             </li>

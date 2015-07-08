@@ -30,15 +30,15 @@
     <div class="tabs tabs-icon-only">
         <a class="tab-item" ng-class="{active: mode == btnModes.CLICK_MODE}"
             ng-click="setMode(btnModes.CLICK_MODE)">
-            <img src="{{getAppIcon('finger')}}" width="48px" height="48px">
+            <img src="{{utils.getAppIcon('finger')}}" width="40px" height="40px">
         </a>
         <a class="tab-item" ng-class="{active: mode == btnModes.EDIT_MODE}"
             ng-click="setMode(btnModes.EDIT_MODE)">
-            <img src="{{getAppIcon('settings')}}" width="48px" height="48px">
+            <img src="{{utils.getAppIcon('settings')}}" width="40px" height="40px">
         </a>
         <a class="tab-item" ng-class="{active: mode == btnModes.STATS_MODE}"
             ng-click="setMode(btnModes.STATS_MODE)">
-            <img src="{{getAppIcon('stats')}}" width="48px" height="48px">
+            <img src="{{utils.getAppIcon('stats')}}" width="40px" height="40px">
         </a>
     </div>
 </ion-view>

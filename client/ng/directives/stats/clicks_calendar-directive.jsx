@@ -6,12 +6,12 @@ app.controls.directive('ngClicksCalendar', ['$rootScope', function($rootScope) {
             btnId: '='
         },
         template: '\
-            <div class="app-click-calendar">\
+            <div class="app-click-calendar" ng-class="{move: $ctrl.isOnMove}">\
                 <div class="header">\
                     <h1>\
-                        {{$ctrl.title}}\
+                        <div>{{$ctrl.title}}</div>\
                         <div ng-if="$ctrl.monthClicks" class="clicks">\
-                            Total clicks: {{$ctrl.monthClicks}}\
+                            <span>{{$ctrl.monthClicks}}</span>\
                         </div>\
                     </h1>\
                     <button class="button button-clear icon ion-arrow-left-b left"\
@@ -28,15 +28,17 @@ app.controls.directive('ngClicksCalendar', ['$rootScope', function($rootScope) {
                             {{day}}\
                         </div>\
                     </div>\
-                    <div ng-repeat="week in $ctrl.weeks" class="week">\
-                        <div ng-repeat="day in week"\
-                            ng-class="{out: day.isOut, clicked: day.nClicks}"\
-                            class="day" style="width:{{$ctrl.dayWidth}}px;">\
-                            <div ng-if="day.nClicks > 1" class="day-clicks">\
-                                {{day.nClicks}}\
-                            </div>\
-                            <div class="day-number" style="font-size:{{$ctrl.fontSize}}px">\
-                                {{day.number}}\
+                    <div class="weeks">\
+                        <div ng-repeat="week in $ctrl.weeks" class="week">\
+                            <div class="day" ng-repeat="day in week"\
+                                ng-class="{out: day.isOut, clicked: day.nClicks}"\
+                                style="width:{{$ctrl.dayWidth}}px">\
+                                <div ng-if="day.nClicks > 1" class="day-clicks">\
+                                    {{day.nClicks}}\
+                                </div>\
+                                <div class="day-number" style="font-size:{{$ctrl.fontSize}}px">\
+                                    {{day.number}}\
+                                </div>\
                             </div>\
                         </div>\
                     </div>\
@@ -61,15 +63,27 @@ class ClicksCalendarCtrl {
     }
 
     onNext() {
-        this.mMonth.add(1, 'months');
-        this.render(this.$scope.btnId, this.mMonth);
-        this.monthClicks = this.getMonthClicks(this.$scope.btnId, this.mMonth);
+        this.isOnMove = true;
+        var self = this;
+        setTimeout(function() {
+            self.mMonth.add(1, 'months');
+            self.render(self.$scope.btnId, self.mMonth);
+            self.monthClicks = self.getMonthClicks(self.$scope.btnId, self.mMonth);
+            self.isOnMove = false;
+            self.$scope.$apply();
+        }, 200);
     }
 
     onPrev() {
-        this.mMonth.subtract(1, 'months');
-        this.render(this.$scope.btnId, this.mMonth);
-        this.monthClicks = this.getMonthClicks(this.$scope.btnId, this.mMonth);
+        this.isOnMove = true;
+        var self = this;
+        setTimeout(function() {
+            self.mMonth.subtract(1, 'months');
+            self.render(self.$scope.btnId, self.mMonth);
+            self.monthClicks = self.getMonthClicks(self.$scope.btnId, self.mMonth);
+            self.isOnMove = false;
+            self.$scope.$apply();
+        }, 200);
     }
 
     render(btnId, mMonth) {
@@ -134,7 +148,7 @@ class ClicksCalendarCtrl {
     }
 
     get title() {
-       return this.mMonth.format('MMMM YYYY');
+       return this.mMonth.format('MMM YYYY');
     }
 
     get dayWidth() {

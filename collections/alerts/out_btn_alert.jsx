@@ -15,10 +15,9 @@ if (Meteor.isClient) {
             return depot.buttons.getButton(this.btnId_);
         }
 
-        get lastDateStr() {
+        get lastClickTimeMs() {
             var button = depot.buttons.getButton(this.btnId_);
-            var mUtcDate = moment.utc(button.lastClick.dateTimeMs);
-            return mUtcDate.local().format('MM/DD/YYYY');
+            return button.lastClick.dateTimeMs;
         }
 
         static create(alert) {

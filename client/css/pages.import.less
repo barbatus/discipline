@@ -49,6 +49,7 @@
     }
 
     .tabs {
+        height: 40px;
         padding-top: 1px;
 
         .tab-item.active {
@@ -64,6 +65,30 @@
 
     ion-footer-bar {
         height: 64px;
+        .transition(ease-in-out, 250ms);
+    }
+
+    ion-footer-bar.hidden {
+        .translateY(100%);
+    }
+
+     ion-footer-bar.shown {
+        .translateY(0);
+    }
+
+    .btn-step {
+        position: absolute;
+        width: 100%;
+        .translateX(100%);
+        .transition(cubic-bezier(0.1, 0.7, 0.1, 1), 250ms);
+    }
+
+    .btn-step.active {
+        .translateX(0);
+    }
+
+    .btn-step.prev {
+        .translateX(-100%);
     }
 
     .btn-icon-step .app-icons-panel {

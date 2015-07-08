@@ -1,22 +1,26 @@
-<div class="modal modal-edit-button" ng-controller="controller">
+<div class="modal modal-edit-button" ng-controller="controller as ctrl">
     <ion-header-bar class="bar bar-header bar-secondary">
-        <button ng-show="hasBack" ng-click="backBtn()"
+        <button ng-show="ctrl.hasBack" ng-click="ctrl.backBtn()"
             class="ng-hide button icon-left ion-chevron-left button-clear button-dark">
         </button>
-        <h1 class="title">Edit Button</h1>
-        <button class="button button-clear button-positive" ng-click="onClose()">
+        <h1 class="title">{{ctrl.step.name}}</h1>
+        <button class="button button-clear button-positive" ng-click="ctrl.onClose()">
             Cancel
         </button>
     </ion-header-bar>
     <ion-content has-header="true" scroll="true">
-        <ng-include ng-if="step == 0" class="btn-icon-step" src="'client/views/buttons/btn_icons.ng.html'">
+        <ng-include class="btn-step btn-icon-step"
+            ng-class="{active: ctrl.checkActive(0), prev: ctrl.checkPrev(0)}"
+            src="'client/views/buttons/btn_icons.ng.html'">
         </ng-include>
-        <ng-include ng-if="step == 1" class="btn-cfg-step" src="'client/views/buttons/btn_config.ng.html'">
+        <ng-include class="btn-step btn-cfg-step"
+            ng-class="{active: ctrl.checkActive(1), prev: ctrl.checkPrev(1)}"
+            src="'client/views/buttons/btn_config.ng.html'">
         </ng-include>
     </ion-content>
-    <ion-footer-bar class="padding">
-        <button class="button button-block button-positive" ng-click="nextBtn()">
-            {{isLast ? 'Update Button' : 'Next'}}
+    <ion-footer-bar class="padding" ng-class="{hidden: ctrl.isOnNext, shown: !ctrl.isOnNext}">
+        <button class="button button-block button-positive" ng-click="ctrl.nextBtn()">
+            {{ctrl.isLast ? 'Update Button' : 'Next'}}
         </button>
     </ion-footer-bar>
 </div>

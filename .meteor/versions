@@ -1,6 +1,6 @@
-angular:angular@1.4.1
-angular:angular-animate@1.4.1
-angular:angular-sanitize@1.4.1
+angular:angular@1.4.2
+angular:angular-animate@1.4.2
+angular:angular-sanitize@1.4.2
 angularui:angular-ui-router@0.2.15
 autoupdate@1.2.1
 barbatus:ionic-autocomplete@0.2.2
@@ -66,7 +66,7 @@ tracker@1.0.7
 ui@1.0.6
 underscore@1.0.3
 underscorestring:underscore.string@3.1.1
-urigo:angular@0.9.1
+urigo:angular@0.9.2
 urigo:ionic@1.0.0_1
 url@1.0.4
 webapp@1.2.0

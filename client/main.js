@@ -46,8 +46,7 @@ app.run(['$rootScope', function($rootScope) {
         task.run();
     }, 15);
 
-    $rootScope.getAppIcon = client.getAppIcon;
-
+    $rootScope.utils = utils;
 }]);
 
 function onReady() {

@@ -31,6 +31,8 @@ Meteor.startup(function() {
         if (opt_clickForToday) {
             insertClick(btnId, 'minutes', 10);
         }
+
+        return btnId;
     }
 
     function insertClick(btnId, timePart, timeVal) {
@@ -52,9 +54,12 @@ Meteor.startup(function() {
 
         insertBtn('btn1', depot.consts.Buttons.MULTI_CLICK, 'sport', true, 5, 30, true);
         insertBtn('btn2', depot.consts.Buttons.MULTI_CLICK, 'sport', true, 10, 30, false);
-        insertBtn('btn3', depot.consts.Buttons.MULTI_CLICK, 'sport', true, 15, 180, false, true);
+        var btnId = insertBtn('btn3', depot.consts.Buttons.MULTI_CLICK, 'sport', true, 15, 180,
+            false, true);
         insertBtn('btn4', depot.consts.Buttons.ONCE_PER_DAY, null, true, 1, 30, true);
         insertBtn('btn5', depot.consts.Buttons.ONCE_PER_DAY, 'food', false, 0);
+
+        depot.alerts.create(btnId, 3, consts.Alerts.OUTDATED, null);
     }
 });
 

@@ -5,22 +5,46 @@
 @clicks-color: rgba(170, 0, 170, 0.26);
 
 .app-click-calendar {
+    .transition(ease-in-out, 100ms);
     padding: 0 5px;
     color: @color;
+    opacity: 1;
+
+    &.move {
+        opacity: 0;
+    }
 
     .header {
         position: relative;
-        padding: 5px 0;
+        padding-top: 5px;
         text-align: center;
+        opacity: 1;
 
         h1 {
             color: @color;
             font-size: 30px;
             margin: 0;
 
+            &>div {
+                display: inline-block;
+            }
+
             .clicks {
-                font-size: 14px;
+                font-size: 0;
                 color: @clicks-bg;
+                height: 25px;
+                width: 25px;
+                line-height: 25px;
+                border-radius: 100%;
+                border: 1px solid purple;
+                vertical-align: baseline;
+                position: relative;
+                white-space: nowrap;
+                top: -5px;
+
+                span {
+                    font-size: 14px;
+                }
             }
         }
 
@@ -41,60 +65,64 @@
     .month {
         padding-bottom: 5px;
 
-        .day-name {
-            display: inline-block;
-            padding: 10px 5px;
-            margin-right: 2px;
-            font-size: 10px;
-            text-align: center;
-            vertical-align: top;
-            text-transform: uppercase;
-            color: @day-color;
-            letter-spacing: .7px;
-
-            &:last-child {
-                margin-right: 0px;
-            }
-        }
-
-        .week {
-            .flex-container();
-            .flex-direction(row);
-            margin-bottom: 2px;
-
-            .day {
+        .week-days {
+            .day-name {
+                display: inline-block;
                 padding: 10px 5px;
                 margin-right: 2px;
+                font-size: 10px;
                 text-align: center;
                 vertical-align: top;
-                position: relative;
-                overflow: hidden;
+                text-transform: uppercase;
+                color: @day-color;
+                letter-spacing: .7px;
 
                 &:last-child {
                     margin-right: 0px;
                 }
+            }
+        }
 
-                &.out {
-                    color: @out-color;
-                }
+        .weeks {
+            .week {
+                .flex-container();
+                .flex-direction(row);
+                margin-bottom: 2px;
 
-                .day-number {
-                    font-size: 25px;
-                    letter-spacing: 1.5px;
-                    padding-top: 2px;
-                }
+                .day {
+                    padding: 10px 5px;
+                    margin-right: 2px;
+                    text-align: center;
+                    vertical-align: top;
+                    position: relative;
+                    overflow: hidden;
 
-                &.clicked {
-                    background-color: @clicks-bg;
-                    border-radius: 5px;
-                }
+                    &:last-child {
+                        margin-right: 0px;
+                    }
 
-                .day-clicks {
-                    position: absolute;
-                    font-size: 15px;
-                    color: @clicks-color;
-                    top: -2px;
-                    right: 2px;
+                    &.out {
+                        color: @out-color;
+                    }
+
+                    .day-number {
+                        font-size: 25px;
+                        letter-spacing: 1.5px;
+                        padding-top: 2px;
+                    }
+
+                    &.clicked {
+                        background-color: @clicks-bg;
+                        border-radius: 5px;
+                    }
+
+                    .day-clicks {
+                        position: absolute;
+                        font-size: 15px;
+                        color: @clicks-color;
+                        top: -2px;
+                        right: 2px;
+                    }
                 }
             }
         }
