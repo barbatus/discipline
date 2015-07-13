@@ -47,6 +47,7 @@ class BtnsPanelCtrl {
         return name != 'undefined' ? s.capitalize(name) : 'Other';
     }
 
+    // TODO: limit button size.
     getBtnSize() {
         var padding = 20;
         var rowSize = this.rowSize;

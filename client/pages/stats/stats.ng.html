@@ -1,7 +1,15 @@
 <ion-view class="stats-page">
     <ion-content scroll="true">
         <div class="body-border"></div>
-        <ng-clicks-calendar btn-id="btnId">
-        </ng-clicks-calendar>
+        <ng-clicks-month-calendar ng-if="mode == calModes.MONTH_MODE && !isRotating" btn-id="btnId">
+        </ng-clicks-month-calendar>
+        <ng-clicks-year-calendar ng-if="mode == calModes.YEAR_MODE && !isRotating" btn-id="btnId">
+        </ng-clicks-year-calendar>
+        <div class="button-bar" ng-if="!isLoading">
+            <a class="button" ng-class="{active: mode == calModes.MONTH_MODE}"
+                ng-click="changeMode(calModes.MONTH_MODE)">Month</a>
+            <a class="button" ng-class="{active: mode == calModes.YEAR_MODE}"
+                ng-click="changeMode(calModes.YEAR_MODE)">Year</a>
+        </div>
     </ion-content>
 </ion-view>

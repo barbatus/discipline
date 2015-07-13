@@ -9,5 +9,9 @@ utils = {
         var duration = moment.duration(diffMS);
         var days = duration.asDays();
         return days >> 0;
+    },
+
+    roundWidth: function(width) {
+        return ((width * 10) >> 0) / 10;
     }
 };

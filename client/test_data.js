@@ -42,7 +42,8 @@ Meteor.startup(function() {
         });
     }
 
-    if (Buttons.find().count() == 0) {
+    if (!localStorage.getItem('loaded')) {
+        localStorage.setItem('loaded', true);
 
         BtnGroups.insert({
             name: 'sport'
@@ -54,12 +55,16 @@ Meteor.startup(function() {
 
         insertBtn('btn1', depot.consts.Buttons.MULTI_CLICK, 'sport', true, 5, 30, true);
         insertBtn('btn2', depot.consts.Buttons.MULTI_CLICK, 'sport', true, 10, 30, false);
-        var btnId = insertBtn('btn3', depot.consts.Buttons.MULTI_CLICK, 'sport', true, 15, 180,
-            false, true);
+
+        var btnId = insertBtn('btn3', depot.consts.Buttons.MULTI_CLICK, 'sport', true,
+            15 /*all clicks*/, 180 /*days period*/, false /*today click*/, true /*alerts*/);
+        depot.alerts.create(btnId, 3, consts.Alerts.OUTDATED, null);
+
         insertBtn('btn4', depot.consts.Buttons.ONCE_PER_DAY, null, true, 1, 30, true);
         insertBtn('btn5', depot.consts.Buttons.ONCE_PER_DAY, 'food', false, 0);
-
-        depot.alerts.create(btnId, 3, consts.Alerts.OUTDATED, null);
+        insertBtn('btn6', depot.consts.Buttons.ONCE_PER_DAY, 'food', true, 0);
+        insertBtn('btn7', depot.consts.Buttons.INPUT_TRACK, 'test', true, 1, 0, true);
+        insertBtn('btn8', depot.consts.Buttons.MULTI_CLICK, 'test', true, 1, 30, false);
     }
 });
 

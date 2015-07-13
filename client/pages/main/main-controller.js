@@ -7,6 +7,14 @@ var BtnModes = {
 app.pages.controller('MainCtrl', ['$rootScope', '$scope', '$timeout', '$meteor',
     '$state', 'BtnDialog',
     function($rootScope, $scope, $timeout, $meteor, $state, BtnDialog) {
+
+        $scope.$on('$stateChangeSuccess',
+            function(event, toState, toParams, fromState, fromParams) {
+                $timeout(function() {
+                    screen.lockOrientation('portrait');
+                });
+            });
+
         $scope.btnModes = BtnModes;
 
         $scope.groupBy = null;

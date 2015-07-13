@@ -50,7 +50,7 @@ if (Meteor.isClient) {
                 groupName: this.groupName,
                 note: this.note,
                 bits: BasicBtn.getBitsArray(this.bits_),
-                value: 0
+                value: this.value
             });
         }
 
@@ -58,6 +58,15 @@ if (Meteor.isClient) {
             check(startDateMs, Number);
 
             return depot.buttons.getClicks(this._id, startDateMs);
+        }
+
+        getDayInfo(utcDayMs) {
+            var clicks = depot.buttons.getDayClicks(this._id, utcDayMs);
+            return s.sprintf('%d times pressed', clicks.count());
+        }
+
+        getDayClicks(utcDayMs) {
+            return depot.buttons.getDayClicks(this._id, utcDayMs);
         }
 
         get lastClick() {

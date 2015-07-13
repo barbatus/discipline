@@ -3,7 +3,7 @@ if (Meteor.isClient) {
     class InputTrackBtn_ extends BasicBtn {
         constructor(button) {
             super(button);
-            this.value = button.value;
+            this.value = button.value || 0;
         }
 
         get type() {
@@ -24,7 +24,7 @@ if (Meteor.isClient) {
         static create(button) {
             return new InputTrackBtn(button || {});
         }
-    }
+    };
 
     InputTrackBtn = InputTrackBtn_;
 }
