@@ -13,9 +13,9 @@ if (Meteor.isClient) {
             return this.count != 0;
         }
 
-        click(opt_value) {
+        click(opt_value, opt_onResult) {
             if (!this.clicked) {
-                super.click(opt_value);
+                super.click(opt_value, opt_onResult);
             }
         }
 

@@ -9,10 +9,11 @@ class InputTrackBtnCtrl extends BasicBtnCtrl {
         var self = this;
         self.checked = true;
         this.showInput_(function(value) {
-            super.click(value);
-            self.$timeout(function() {
-                self.checked = false;
-            }, 100);
+            super.click(value, function(errorMsg) {
+                self.$timeout(function() {
+                    self.checked = false;
+                }, 100);
+            });
         }, function() {
             self.$timeout(function() {
                 self.checked = false;

@@ -10,3 +10,5 @@ App.icons({
     'iphone_2x': 'resources/icons/iphone_2x.png',
     'iphone_3x': 'resources/icons/iphone_3x.png'
 });
+
+App.accessRule('*');

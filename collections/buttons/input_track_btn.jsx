@@ -10,15 +10,22 @@ if (Meteor.isClient) {
             return depot.consts.Buttons.INPUT_TRACK;
         }
 
-        click(value) {
+        click(value, opt_onResult) {
             check(value, Number);
 
-            super.click(value);
-            if (_.isNumber(value)) {
-                depot.buttons.update(this._id, {
-                    value: this.value + value
-                });
-            }
+            var self = this;
+            super.click(value, function(errorMsg) {
+                if (!errorMsg) {
+                    if (_.isNumber(value)) {
+                        depot.buttons.update(self._id, {
+                            value: self.value + value
+                        });
+                    }
+                }
+                if (opt_onResult) {
+                    opt_onResult(errorMsg);
+                }
+            });
         }
 
         static create(button) {

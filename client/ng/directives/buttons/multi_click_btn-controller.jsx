@@ -5,10 +5,11 @@ class MultiClickBtnCtrl extends BasicBtnCtrl {
     }
 
     click() {
-        super.click();
         var self = this;
-        this.$timeout(function() {
-            self.checked = false;
+        super.click(function() {
+            self.$timeout(function() {
+                self.checked = false;
+            });
         });
     }
 };

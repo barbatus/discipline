@@ -74,13 +74,14 @@ var lib = {
         return Buttons.insert(options);
     },
 
-    addClick: function(buttonId, opt_value) {
+    addClick: function(buttonId, dateTimeMs, opt_value, opt_eventId) {
+        check(dateTimeMs, Number);
         checkNullOrType(opt_value, Number);
 
-        var dateTimeMs = moment.utc().valueOf();
         depot.clicks.create(buttonId, {
             value: opt_value,
-            dateTimeMs: dateTimeMs
+            dateTimeMs: dateTimeMs,
+            eventId: opt_eventId
         });
     },
 
@@ -103,8 +104,12 @@ var lib = {
     getDayClicks: function(buttonId, dateMs) {
         check(dateMs, Number);
 
-        var dayMs = moment(dateMs).utc().valueOf();
-        return depot.buttons.getClicks(buttonId, dayMs, dayMs + 24 * 60 * 60 * 1000);
+        //var dayMs = moment(dateMs).utc().valueOf();
+        return depot.buttons.getClicks(buttonId, dateMs, dateMs + 24 * 60 * 60 * 1000);
+    },
+
+    getDayClick: function(buttonId, dateMs) {
+        return depot.buttons.getDayClicks(buttonId, dateMs).fetch()[0];
     },
 
     getTodayCount: function(buttonId) {

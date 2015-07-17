@@ -89,7 +89,7 @@ class EditBtnDlg_ extends NewBtnDlg {
 
     onFinish_(callback) {
         callback(this.button);
-        this.close();
+        this.onClose_();
     }
 };
 

@@ -7,7 +7,7 @@ consts = {
 
     BtnBits: {
         SEND_ALERTS: 1,
-        ADD_EVENT: 2
+        SAVE_AS_EVENT: 2
     },
 
     Icons: {

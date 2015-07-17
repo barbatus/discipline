@@ -15,14 +15,29 @@ class BasicBtnCtrl_ {
         this.$scope.$emit('$bclick', this.model._id);
 
         if (this.enabled) {
-            this.click();
+            var self = this;
+            this.click(function(errorMsg) {
+               self.$scope.$apply();
+            });
         }
     }
 
-    click(opt_value) {
+    click(opt_value, onResult) {
+        if (_.isFunction(opt_value)) {
+            onResult = opt_value;
+            opt_value = null;
+        }
+
         if (this.enabled) {
             this.checked = true;
-            this.model.click(opt_value);
+            this.model.click(opt_value,
+                function(errorMsg) {
+                    onResult(errorMsg);
+                    if (errorMsg) {
+                        // TODO: move to a service.
+                        window.plugins.toast.showLongBottom(errorMsg);
+                    }
+                });
         }
     }
 

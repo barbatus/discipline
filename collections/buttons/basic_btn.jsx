@@ -27,8 +27,37 @@ if (Meteor.isClient) {
             return this.bits_;
         }
 
-        click(opt_value) {
-            depot.buttons.addClick(this._id, opt_value);
+        click(opt_value, opt_onResult) {
+            if (_.isFunction(opt_value)) {
+                opt_onResult = opt_value;
+                opt_value = null;
+            }
+
+            var btnId = this._id;
+            var dateMs = time.getDateMs();
+            var dateTimeMs = moment().valueOf();
+            if (this.bits.SAVE_AS_EVENT) {
+                var todayClick = depot.buttons.getDayClick(btnId, dateMs);
+                var eventId = todayClick && todayClick.eventId || null;
+                this.saveClick_(eventId, function(eventId) {
+                    depot.buttons.addClick(btnId, dateTimeMs,
+                        opt_value, eventId);
+                    if (opt_onResult) {
+                        opt_onResult();
+                    }
+                }, function(error) {
+                    if (opt_onResult) {
+                        opt_onResult(error);
+                    }
+                });
+                return;
+            }
+            setTimeout(function() {
+                depot.buttons.addClick(btnId, dateTimeMs, opt_value);
+                if (opt_onResult) {
+                    opt_onResult();
+                }
+            });
         }
 
         save() {
@@ -52,6 +81,20 @@ if (Meteor.isClient) {
                 bits: BasicBtn.getBitsArray(this.bits_),
                 value: this.value
             });
+        }
+
+        // Saves click to Google calendar.
+        saveClick_(eventId, onSuccess, opt_onError) {
+            var summary = s.sprintf('%s(x%d)', this.name, this.count + 1);
+            Calendar.saveClick(eventId, summary, moment().valueOf(), this.note,
+                function(eventId) {
+                    onSuccess(eventId);
+                },
+                function(error) {
+                    if (opt_onError) {
+                        opt_onError(error);
+                    }
+                });
         }
 
         getClicks(startDateMs) {
