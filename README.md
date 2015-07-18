@@ -1,7 +1,7 @@
 # Discipline
 Productivity mobile app to track habbits and daily activities (in active development).
 
-Built with the help of Meteor and Cordova.
+Built with Meteor.js and Cordova.
 
 Some screenshots:
 
