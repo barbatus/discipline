@@ -1,6 +1,8 @@
 # Discipline
 Productivity mobile app to track habbits and daily activities (in active development).
 
+Built with Meteor.js and Cordova.
+
 Some screenshots:
 
 <img src="https://raw.githubusercontent.com/barbatus/discipline/master/demo/tracking_buttons.png"  width="250">
