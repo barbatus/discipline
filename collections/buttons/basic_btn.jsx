@@ -8,6 +8,7 @@ if (Meteor.isClient) {
             this.groupName = button.groupName;
             this.note = button.note;
             this.bits_ = BasicBtn.getBitsObj(button.bits);
+            this.value = button.value;
         }
 
         get count() {
@@ -33,27 +34,28 @@ if (Meteor.isClient) {
                 opt_value = null;
             }
 
-            var btnId = this._id;
             var dateMs = time.getDateMs();
-            var dateTimeMs = moment().valueOf();
+            var clickId = this.addClick(opt_value);
+
             if (this.bits.SAVE_AS_EVENT) {
-                var todayClick = depot.buttons.getDayClick(btnId, dateMs);
+                var todayClick = depot.buttons.getEventClick(this._id, dateMs);
                 var eventId = todayClick && todayClick.eventId || null;
                 this.saveClick_(eventId, function(eventId) {
-                    depot.buttons.addClick(btnId, dateTimeMs,
-                        opt_value, eventId);
+                    depot.clicks.update(clickId, {
+                        eventId: eventId
+                    });
                     if (opt_onResult) {
                         opt_onResult();
                     }
-                }, function(error) {
+                }, function(errorMsg) {
+                    depot.clicks.remove(clickId);
                     if (opt_onResult) {
-                        opt_onResult(error);
+                        opt_onResult(errorMsg);
                     }
                 });
                 return;
             }
             setTimeout(function() {
-                depot.buttons.addClick(btnId, dateTimeMs, opt_value);
                 if (opt_onResult) {
                     opt_onResult();
                 }
@@ -83,16 +85,21 @@ if (Meteor.isClient) {
             });
         }
 
+        addClick(opt_value) {
+            var dateTimeMs = moment().valueOf();
+            return depot.buttons.addClick(this._id, dateTimeMs, opt_value);
+        }
+
         // Saves click to Google calendar.
         saveClick_(eventId, onSuccess, opt_onError) {
-            var summary = s.sprintf('%s(x%d)', this.name, this.count + 1);
-            Calendar.saveClick(eventId, summary, moment().valueOf(), this.note,
+            Calendar.saveClick(eventId, this.eventInfo,
+                moment().valueOf(), this.note,
                 function(eventId) {
                     onSuccess(eventId);
                 },
-                function(error) {
+                function(errorMsg) {
                     if (opt_onError) {
-                        opt_onError(error);
+                        opt_onError(errorMsg);
                     }
                 });
         }
@@ -106,6 +113,10 @@ if (Meteor.isClient) {
         getDayInfo(utcDayMs) {
             var clicks = depot.buttons.getDayClicks(this._id, utcDayMs);
             return s.sprintf('%d times pressed', clicks.count());
+        }
+
+        get eventInfo() {
+            return s.sprintf('%s(x%d)', this.name, this.count);
         }
 
         getDayClicks(utcDayMs) {

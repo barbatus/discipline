@@ -1,6 +1,6 @@
-app.controls.directive('ngInputTrackButton', ['$rootScope', function($rootScope) {
+app.controls.directive('ngTimerButton', ['$rootScope', function($rootScope) {
     return {
-        controller: 'NgInputTrackButtonController',
+        controller: 'NgTimerButtonController',
         controllerAs: '$ctrl',
         require: 'ngModel',
         scope: {
@@ -11,12 +11,12 @@ app.controls.directive('ngInputTrackButton', ['$rootScope', function($rootScope)
             <div class="app-button-wrapper">\
                 <div class="app-button"\
                     ng-click="$ctrl.onClick()">\
-                    <div ng-show="$ctrl.model.value" class="count">\
-                        &Sigma;{{$ctrl.model.value}}\
-                    </div>\
-                    <input type="checkbox" ng-if="!$ctrl.editMode"\
-                        ng-checked="$ctrl.checked"\
+                    <input type="checkbox" ng-checked="$ctrl.checked"\
+                        ng-if="!$ctrl.editMode"\
                         ng-disabled="!$ctrl.enabled">\
+                    <div ng-show="$ctrl.timePastMs" class="count">\
+                        {{$ctrl.timePastStr}}\
+                    </div>\
                     <div class="button">\
                         <div ng-if="$ctrl.icon" style="background-image:url({{$ctrl.icon}})"\
                             class="icon">\

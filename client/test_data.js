@@ -65,6 +65,7 @@ Meteor.startup(function() {
         insertBtn('btn6', depot.consts.Buttons.ONCE_PER_DAY, 'food', true, 0);
         insertBtn('btn7', depot.consts.Buttons.INPUT_TRACK, 'test', true, 1, 0, true);
         insertBtn('btn8', depot.consts.Buttons.MULTI_CLICK, 'test', true, 1, 30, false);
+        insertBtn('btn9', depot.consts.Buttons.TIMER, 'test', true, 0);
     }
 });
 

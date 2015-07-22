@@ -6,7 +6,8 @@ ng-track-button {
 
 ng-multi-click-button,
 ng-opd-track-button,
-ng-input-track-button {
+ng-input-track-button,
+ng-timer-button {
     display: block;
     height: 100%;
     width: 100%;
@@ -65,29 +66,17 @@ ng-input-track-button {
 
         .count {
             position: absolute;
-            right: -5px;
-            top: -5px;
-            font-size: 18px;
-            height: 30px;
-            line-height: 30px;
-            width: 30px;
-            border-radius: 100%;
+            right: -10px;
+            top: -18px;
+            font-size: 25px;
+            min-height: 35px;
+            line-height: 35px;
+            min-width: 35px;
+            border-radius: 50px;
             background-color: rgb(255, 92, 185);
             text-align: center;
-        }
-
-        .value {
-            position: absolute;
-            left: 50%;
-            top: -5px;
-            margin-left: -30px;
-            font-size: 18px;
-            height: 25px;
-            line-height: 25px;
-            width: 60px;
-            border-radius: 16px;
-            background-color: #5c93ff;
-            text-align: center;
+            padding: 0 5px;
+            z-index: 9999;
         }
 
         .label {

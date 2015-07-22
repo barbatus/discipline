@@ -138,9 +138,7 @@ class ClicksMCalendarCtrl {
     }
 
     getDayClicks(btnId, mDay) {
-        //var mUtcDay = mDay.clone().utc();
-        var clicks = depot.buttons.getDayClicks(btnId, mDay.valueOf());
-        return clicks;
+        return depot.buttons.getDayClicks(btnId, mDay.valueOf());
     }
 
     get title() {

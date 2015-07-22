@@ -15,8 +15,12 @@ if (Meteor.isClient) {
             if (type == depot.consts.Buttons.INPUT_TRACK) {
                 return InputTrackBtn.create(btnCfg);
             }
+
+            if (type = depot.consts.Buttons.TIMER) {
+                return TimerBtn.create(btnCfg);
+            }
         }
-    }
+    };
 
     BtnFactory = BtnFactory_;
 }

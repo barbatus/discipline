@@ -78,7 +78,7 @@ var lib = {
         check(dateTimeMs, Number);
         checkNullOrType(opt_value, Number);
 
-        depot.clicks.create(buttonId, {
+        return depot.clicks.create(buttonId, {
             value: opt_value,
             dateTimeMs: dateTimeMs,
             eventId: opt_eventId
@@ -104,18 +104,24 @@ var lib = {
     getDayClicks: function(buttonId, dateMs) {
         check(dateMs, Number);
 
-        //var dayMs = moment(dateMs).utc().valueOf();
         return depot.buttons.getClicks(buttonId, dateMs, dateMs + 24 * 60 * 60 * 1000);
     },
 
-    getDayClick: function(buttonId, dateMs) {
-        return depot.buttons.getDayClicks(buttonId, dateMs).fetch()[0];
+    getEventClick: function(buttonId, dateMs) {
+        var eventClick = null;
+        depot.buttons.getDayClicks(buttonId, dateMs).forEach(
+            function(click) {
+                if (click.eventId) {
+                    eventClick = click;
+                }
+            });
+        return eventClick;
     },
 
     getTodayCount: function(buttonId) {
         var now = moment();
         var dateMs = moment.utc([now.year(), now.month(),
-            now.date() - 1]).valueOf();
+            now.date()]).valueOf();
         return depot.buttons.getClicks(buttonId, dateMs).count();
     },
 

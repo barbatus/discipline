@@ -30,6 +30,20 @@ var lib = {
         }
         opt.buttonId = buttonId;
         return Clicks.find(opt, {sort: {dateTimeMs: -1}});
+    },
+
+    remove: function(id) {
+        check(id, String);
+
+        Clicks.remove(id);
+    },
+
+    update: function(id, options) {
+        check(id, String);
+
+        Clicks.update(id, {
+            $set: options
+        });
     }
 };
 

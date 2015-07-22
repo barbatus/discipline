@@ -12,7 +12,7 @@ if (Meteor.isClient) {
         static create(button) {
             return new MultiClickBtn(button || {});
         }
-    }
+    };
 
     MultiClickBtn = MultiClickBtn_;
 }

@@ -3,29 +3,29 @@ if (Meteor.isClient) {
     class InputTrackBtn_ extends BasicBtn {
         constructor(button) {
             super(button);
-            this.value = button.value || 0;
+            this.value = this.value || 0;
         }
 
         get type() {
             return depot.consts.Buttons.INPUT_TRACK;
         }
 
-        click(value, opt_onResult) {
+        saveValue(value) {
             check(value, Number);
 
-            var self = this;
-            super.click(value, function(errorMsg) {
-                if (!errorMsg) {
-                    if (_.isNumber(value)) {
-                        depot.buttons.update(self._id, {
-                            value: self.value + value
-                        });
-                    }
-                }
-                if (opt_onResult) {
-                    opt_onResult(errorMsg);
-                }
+            depot.buttons.update(this._id, {
+                value: this.value + value
             });
+        }
+
+        addClick(opt_value) {
+            var clickId = super.addClick(opt_value);
+            this.saveValue(opt_value);
+            return clickId;
+        }
+
+        get eventInfo() {
+            return s.sprintf('%s(∑%d)', this.name, this.value);
         }
 
         static create(button) {

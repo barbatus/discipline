@@ -18,6 +18,9 @@ app.controls.directive('ngTrackButton', ['$rootScope', function($rootScope) {
             <ng-input-track-button ng-if="$ctrl.inTrack" ng-style="$ctrl.btnStyle"\
                 ng-edit-mode="ngEditMode" ng-model="ngModel">\
             </ng-input-track-button>\
+            <ng-timer-button ng-if="$ctrl.timer" ng-style="$ctrl.btnStyle"\
+                ng-edit-mode="ngEditMode" ng-model="ngModel">\
+            </ng-timer-button>\
             <div class="app-button-title" ng-if="$ctrl.model.icon && $ctrl.model.name">\
                 <div class="backbox">\
                     {{$ctrl.model.name}}\
@@ -47,6 +50,10 @@ class TrackBtnCtrl {
     get inTrack() {
         return this.model.type == depot.consts.Buttons.INPUT_TRACK;
     }
-}
+
+    get timer() {
+        return this.model.type == depot.consts.Buttons.TIMER;
+    }
+};
 
 app.controls.controller('NgTrackButtonController', ['$scope', TrackBtnCtrl]);
