@@ -1,6 +1,5 @@
 app.views.controller('BtnGroupsCtrl', ['$scope', '$meteor',
     function($scope, $meteor) {
-
         $scope.findGroups = function(query) {
             var items = depot.buttons.findGroups(query).map(function(groupItem) {
                 return {
@@ -18,7 +17,6 @@ app.views.controller('BtnGroupsCtrl', ['$scope', '$meteor',
         };
 
         $scope.chooseGroup = function(callback) {
-            $scope.btnCfg.groupName = callback.item.name.toLowerCase();
+            $scope.btnModel.cfg.groupName = callback.item.name.toLowerCase();
         };
-
     }]);

@@ -1,16 +1,32 @@
+class DlgStep {
+    constructor(name) {
+        this.name_ = name;
+    }
+
+    get name() {
+        return this.name_;
+    }
+
+    checkValid(btnModel) {
+        return !!btnModel.type;
+    }
+};
+
+class CfgStep extends DlgStep {
+    constructor(name) {
+        super(name);
+    }
+
+    checkValid(btnModel) {
+        return !!(btnModel.cfg.iconId || btnModel.cfg.name);
+    }
+};
+
 class DlgNewBtnCtrl_ {
     constructor($scope, $meteor) {
         this.$scope = $scope;
         this.step_ = 0;
         this.isMoving_ = false;
-
-        $scope.btnTypes = $meteor.collection(function() {
-            return depot.buttons.getTypes();
-        }, false);
-
-        $scope.chooseType = function(btnType) {
-            $scope.btnType = btnType;
-        };
     }
 
     nextBtn() {
@@ -40,11 +56,17 @@ class DlgNewBtnCtrl_ {
     }
 
     get steps() {
-        return [{name: 'Button type'}, {name: 'Button icon'}, {name: 'Settings'}];
+        return [new DlgStep('Button type'),
+                new DlgStep('Button icon'),
+                new CfgStep('Settings')];
     }
 
     get isLast() {
         return this.step_ == this.steps.length - 1;
+    }
+
+    get isValid() {
+        return this.step.checkValid(this.$scope.btnModel);
     }
 
     get hasBack() {
@@ -74,7 +96,8 @@ class DlgNewBtnCtrl_ {
 
 class DlgEditBtnCtrl_ extends DlgNewBtnCtrl_ {
     get steps() {
-        return [{name: 'Button icon'}, {name: 'Settings'}];
+        return [new DlgStep('Button icon'),
+                new CfgStep('Settings')];
     }
 };
 

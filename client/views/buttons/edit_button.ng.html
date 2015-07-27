@@ -19,7 +19,8 @@
         </ng-include>
     </ion-content>
     <ion-footer-bar class="padding" ng-class="{hidden: ctrl.isOnNext, shown: !ctrl.isOnNext}">
-        <button class="button button-block button-positive" ng-click="ctrl.nextBtn()">
+        <button class="button button-block button-positive"
+            ng-disabled="!ctrl.isValid" ng-click="ctrl.nextBtn()">
             {{ctrl.isLast ? 'Update Button' : 'Next'}}
         </button>
     </ion-footer-bar>

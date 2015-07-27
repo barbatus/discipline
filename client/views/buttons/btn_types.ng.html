@@ -1,9 +1,9 @@
-<div class="padding">
+<div class="padding" ng-controller="BtnTypesCtrl">
     <div class="app-icons-panel">
-        <div>
+        <div class="row">
             <div class="app-button-icon" ng-repeat="btnTypeItem in btnTypes"
                 ng-click="chooseType(btnTypeItem)">
-                <input type="radio" name="type" ng-checked="btnType.type == btnTypeItem.type"
+                <input type="radio" name="type" ng-checked="btnModel.type == btnTypeItem.type"
                     ng-click="selBtnTypeItem = btnTypeItem">
                 <img src="{{btnTypeItem.icon}}" class="icon">
             </div>

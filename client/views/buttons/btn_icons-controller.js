@@ -1,6 +1,5 @@
 app.views.controller('BtnIconsCtrl', ['$scope', '$meteor', '$timeout',
     function($scope, $meteor, $timeout) {
-
         $scope.getByTagQuery = '';
 
         $scope.btnIcons = $meteor.collection(function() {

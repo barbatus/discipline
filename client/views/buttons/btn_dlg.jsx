@@ -20,6 +20,31 @@ app.views.factory('BtnDialog', ['$rootScope', '$ionicModal', '$controller',
         return dialog;
     }]);
 
+class EditBtnModel {
+    constructor(button) {
+        this.cfg_ = button || {};
+        this.bits_ = this.cfg_.bits || {};
+        var btnType = BtnFactory.getType(button);
+        this.type_ = btnType != depot.consts.Buttons.UNKNOWN ? btnType : null;
+    }
+
+    get cfg() {
+        return this.cfg_;
+    }
+
+    get type() {
+        return this.type_;
+    }
+
+    set type(value) {
+        this.type_ = value;
+    }
+
+    get bits() {
+        return this.bits_;
+    }
+};
+
 class NewBtnDlg_ {
     constructor($scope, $ionicModal, $controller) {
         this.$scope = $scope;
@@ -27,16 +52,17 @@ class NewBtnDlg_ {
         this.$controller = function() {
             return $controller;
         };
-        this.button = {};
     }
 
     open(onFinish) {
+        this.openInternal(new EditBtnModel(), onFinish);
+    }
+
+    openInternal(model, onFinish) {
         this.$scope.onFinish = _.bind(this.onFinish_, this, onFinish);
         this.$scope.onClose = _.bind(this.onClose_, this);
         this.$scope.controller = this.$controller;
-        this.$scope.btnType = null;
-        this.$scope.btnCfg = this.button;
-        this.$scope.btnBits = this.button.bits || {};
+        this.$scope.btnModel = model;
         this.openWithScope(this.$scope);
     }
 
@@ -64,9 +90,9 @@ class NewBtnDlg_ {
     }
 
     onFinish_(callback) {
-        var bitsArray = BasicBtn.getBitsArray(this.$scope.btnBits);
-        callback(this.$scope.btnType.type,
-            this.$scope.btnCfg, bitsArray);
+        var scope = this.$scope;
+        var bitsArray = BasicBtn.getBitsArray(scope.btnModel.bits);
+        callback(scope.btnModel.type, scope.btnModel.cfg, bitsArray);
         this.onClose_();
     }
 };
@@ -79,8 +105,7 @@ class EditBtnDlg_ extends NewBtnDlg {
     }
 
     open(button, onClose) {
-        this.button = button;
-        super.open(onClose);
+        this.openInternal(new EditBtnModel(button), onClose);
     }
 
     get tmplPath_() {

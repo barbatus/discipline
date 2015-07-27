@@ -1,7 +1,7 @@
 <div class="list" ng-controller="BtnGroupsCtrl">
     <div class="item item-input-inset">
         <label class="item-input-wrapper">
-          <input type="text" placeholder="Name" ng-model="btnCfg.name">
+          <input type="text" placeholder="Name" ng-model="btnModel.cfg.name">
         </label>
     </div>
     <div class="item item-input-inset">
@@ -13,18 +13,18 @@
     </div>
     <div class="item item-input-inset">
         <label class="item-input-wrapper">
-            <textarea placeholder="Note" ng-model="btnCfg.note"></textarea>
+            <textarea placeholder="Note" ng-model="btnModel.cfg.note"></textarea>
         </label>
     </div>
     <li class="item item-checkbox">
         <label class="checkbox">
-            <input type="checkbox" ng-model="btnBits.SEND_ALERTS">
+            <input type="checkbox" ng-model="btnModel.bits.SEND_ALERTS">
         </label>
         Send Notifications
     </li>
     <li class="item item-checkbox">
         <label class="checkbox">
-            <input type="checkbox" ng-model="btnBits.SAVE_AS_EVENT">
+            <input type="checkbox" ng-model="btnModel.bits.SAVE_AS_EVENT">
         </label>
         Save in Calendar
     </li>
