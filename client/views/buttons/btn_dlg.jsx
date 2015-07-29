@@ -20,31 +20,6 @@ app.views.factory('BtnDialog', ['$rootScope', '$ionicModal', '$controller',
         return dialog;
     }]);
 
-class EditBtnModel {
-    constructor(button) {
-        this.cfg_ = button || {};
-        this.bits_ = this.cfg_.bits || {};
-        var btnType = BtnFactory.getType(button);
-        this.type_ = btnType != depot.consts.Buttons.UNKNOWN ? btnType : null;
-    }
-
-    get cfg() {
-        return this.cfg_;
-    }
-
-    get type() {
-        return this.type_;
-    }
-
-    set type(value) {
-        this.type_ = value;
-    }
-
-    get bits() {
-        return this.bits_;
-    }
-};
-
 class NewBtnDlg_ {
     constructor($scope, $ionicModal, $controller) {
         this.$scope = $scope;
@@ -55,7 +30,7 @@ class NewBtnDlg_ {
     }
 
     open(onFinish) {
-        this.openInternal(new EditBtnModel(), onFinish);
+        this.openInternal({bits: {}, type: null}, onFinish);
     }
 
     openInternal(model, onFinish) {
@@ -92,7 +67,7 @@ class NewBtnDlg_ {
     onFinish_(callback) {
         var scope = this.$scope;
         var bitsArray = BasicBtn.getBitsArray(scope.btnModel.bits);
-        callback(scope.btnModel.type, scope.btnModel.cfg, bitsArray);
+        callback(scope.btnModel.type, scope.btnModel, bitsArray);
         this.onClose_();
     }
 };
@@ -105,7 +80,8 @@ class EditBtnDlg_ extends NewBtnDlg {
     }
 
     open(button, onClose) {
-        this.openInternal(new EditBtnModel(button), onClose);
+        this.button = button;
+        this.openInternal(button, onClose);
     }
 
     get tmplPath_() {

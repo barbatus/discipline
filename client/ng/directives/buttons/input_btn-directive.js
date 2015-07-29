@@ -11,8 +11,12 @@ app.controls.directive('ngInputTrackButton', ['$rootScope', function($rootScope)
             <div class="app-button-wrapper">\
                 <div class="app-button"\
                     ng-click="$ctrl.onClick()">\
-                    <div ng-show="$ctrl.model.value" class="count">\
+                    <div ng-show="$ctrl.model.value && !$ctrl.editMode"\
+                        class="count">\
                         &Sigma;{{$ctrl.model.value}}\
+                    </div>\
+                    <div ng-show="$ctrl.editMode" class="remove"\
+                        ng-click="$ctrl.archive($event)">\
                     </div>\
                     <input type="checkbox" ng-if="!$ctrl.editMode"\
                         ng-checked="$ctrl.checked"\

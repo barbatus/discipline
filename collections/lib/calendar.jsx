@@ -113,7 +113,7 @@ class Calendar_ {
         return calendar.createCalendar('discipline', accessToken);
     }
 
-    static saveClick_(eventId, calId, name, mDate, description, accessToken) {
+    static saveEvent_(eventId, calId, name, mDate, description, accessToken) {
         if (eventId) {
             return calendar.updateEvent(eventId, calId, name, mDate,
                 description, accessToken);
@@ -153,7 +153,7 @@ class Calendar_ {
         return errorResponse.responseText;
     }
 
-    static saveClick(eventId, name, dateMs, note, opt_onSuccess, opt_onError) {
+    static saveEvent(eventId, name, dateMs, note, opt_onSuccess, opt_onError) {
         check(name, String);
         check(dateMs, Number);
 
@@ -176,7 +176,7 @@ class Calendar_ {
             if (!calId) {
                 Calendar.createCalendar_(accessToken).done(function(response) {
                     localStorage['calendar_id'] = response.id;
-                    Calendar.saveClick_(eventId, response.id, name,
+                    Calendar.saveEvent_(eventId, response.id, name,
                         mDate, note, accessToken).
                             done(function(response) {
                                 onSuccess(response.id);
@@ -187,7 +187,7 @@ class Calendar_ {
                     onError(Calendar.buildErrorMsg_(response));
                 });
             } else {
-                Calendar.saveClick_(eventId, calId, name,
+                Calendar.saveEvent_(eventId, calId, name,
                     mDate, note, accessToken).
                         done(function(response) {
                             onSuccess(response.id);

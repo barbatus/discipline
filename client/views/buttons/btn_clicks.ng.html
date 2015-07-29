@@ -1,0 +1,10 @@
+<div class="padding" ng-controller="BtnProfileCtrl">
+    <div class="app-clicks-panel">
+        <div class="app-btn-click" ng-repeat="click in clicks" ng-click="remove(click._id)">
+            {{clickInfo(click._id)}}
+        </div>
+        <div ng-show="!clicks.length">
+            No clicks today yet
+        </div>
+    </div>
+</div>

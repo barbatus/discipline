@@ -1,3 +1,28 @@
+.app-clicks-panel {
+    .flex-container();
+    .flex-direction(row);
+    -webkit-flex-wrap: wrap;
+
+    .app-btn-click {
+        position: relative;
+        padding: 5px 10px;
+        padding-right: 25px;
+        border: 1px solid #eee;
+        border-radius: 10px;
+        margin: 0 5px 5px 0;
+        white-space: nowrap;
+        overflow: hidden;
+
+        &:after {
+            font-family: "Ionicons";
+            content: "\f129";
+            color: rgba(88, 88, 88, 0.99);
+            position: absolute;
+            right: 5px;
+        }
+    }
+}
+
 .app-icons-panel > div {
     .flex-container();
     .flex-direction(row);

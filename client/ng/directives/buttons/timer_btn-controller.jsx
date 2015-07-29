@@ -6,12 +6,14 @@ class TimerBtnCtrl extends BasicBtnCtrl {
         this.$timeout = $timeout;
         this.$interval = $interval;
         this.timePastMs_ = this.model.value;
+        this.timeToSave_ = 0;
     }
 
     click() {
         var self = this;
-        this.$interval.cancel(self.prIntrl_);
+        self.$interval.cancel(self.prIntrl_);
         if (!self.checked) {
+            this.timePastMs_ = this.model.value;
             self.checked = true;
             self.prIntrl_ = this.$interval(function() {
                 self.incTime_(saveIntrlMs);
@@ -28,19 +30,21 @@ class TimerBtnCtrl extends BasicBtnCtrl {
     }
 
     get timePastMs() {
-        return this.timePastMs_;
+        return !this.checked ? this.model.value : this.timePastMs_;
     }
 
     get timePastStr() {
-        return time.getPastTimeStr(this.timePastMs_);
+        return time.getPastTimeStr(this.timePastMs);
     }
 
     incTime_(timePastMs) {
         this.timePastMs_ += timePastMs;
-        localStorage.setItem(this.model._id, this.timePastMs_);
+        this.timeToSave_ += timePastMs;
+        localStorage.setItem(this.model._id, this.timeToSave_);
     }
 
     saveBtnTime_(onResult) {
+        this.timeToSave_ = 0;
         var savedTime = parseInt(localStorage.getItem(this.model._id), 10);
         if (savedTime) {
             var self = this;

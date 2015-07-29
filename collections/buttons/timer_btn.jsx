@@ -3,19 +3,15 @@ if (Meteor.isClient) {
     class TimerBtn_ extends InputTrackBtn {
         constructor(button) {
             super(button);
-            this.value = this.value || 0;
         }
 
         get type() {
             return depot.consts.Buttons.TIMER;
         }
 
-        saveValue(value) {
-            check(value, Number);
-
-            depot.buttons.update(this._id, {
-                value: value
-            });
+        getClickInfo(clickId) {
+            var click = depot.clicks.getClick(clickId);
+            return time.getPastTimeStr(click.value);
         }
 
         get eventInfo() {

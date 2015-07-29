@@ -5,6 +5,6 @@ app.views.controller('BtnTypesCtrl', ['$scope', '$meteor', '$timeout',
         }, false);
 
         $scope.chooseType = function(btnType) {
-            $scope.btnModel.type = btnType;
+            $scope.btnModel.type = btnType.type;
         };
     }]);

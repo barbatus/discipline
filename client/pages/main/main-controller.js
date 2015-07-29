@@ -19,13 +19,14 @@ app.pages.controller('MainCtrl', ['$rootScope', '$scope', '$timeout', '$meteor',
 
         $scope.groupBy = null;
         $scope.buttons = $meteor.collection(function() {
-            return depot.buttons.get();
+            return BasicBtn.getAll();
         }, false);
 
         $scope.showAddButton = function() {
             var newBtnDlg = BtnDialog.newBtn();
             newBtnDlg.open(function(type, btnCfg, btnBits) {
                 var button = BtnFactory.create(type, btnCfg, btnBits);
+                console.log(button);
                 button.save();
             });
         };

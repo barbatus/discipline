@@ -1,13 +1,13 @@
 class BasicBtnCtrl_ {
     constructor($scope) {
         this.$scope = $scope;
-        this._model = $scope.ngModel;
-        this._checked = false;
-        this._editMode = false;
+        this.model_ = $scope.ngModel;
+        this.checked_ = false;
+        this.editMode_ = false;
 
         var self = this;
         $scope.$watch('ngEditMode', function(editMode) {
-            self._editMode = editMode;
+            self.editMode_ = editMode;
         });
     }
 
@@ -41,16 +41,21 @@ class BasicBtnCtrl_ {
         }
     }
 
+    archive(event) {
+        event.stopPropagation();
+        this.model_.archive();
+    }
+
     get checked() {
-        return this._checked;
+        return this.checked_;
     }
 
     set checked(value) {
-        this._checked = value;
+        this.checked_ = value;
     }
 
     get model() {
-        return this._model;
+        return this.model_;
     }
 
     get enabled() {
@@ -58,7 +63,7 @@ class BasicBtnCtrl_ {
     }
 
     get editMode() {
-        return this._editMode;
+        return this.editMode_;
     }
 
     get icon() {

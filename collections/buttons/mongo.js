@@ -32,16 +32,17 @@ Meteor.startup(function() {
 });
 
 var lib = {
-    get: function(opt_type, opt_bit) {
+    get: function(opt_opts, opt_type, opt_bit) {
         checkNullOrType(opt_type, Array);
 
-        var opts = {};
+        var opts = opt_opts || {};
         if (opt_type) {
             opts.type = {$in: opt_type};
         }
         if (opt_bit) {
             opts.bits = {$all: opt_bit};
         }
+
         return Buttons.find(opts);
     },
 
@@ -118,11 +119,24 @@ var lib = {
         return eventClick;
     },
 
-    getTodayCount: function(buttonId) {
+    getTodayClicks: function(buttonId) {
         var now = moment();
         var dateMs = moment.utc([now.year(), now.month(),
             now.date()]).valueOf();
-        return depot.buttons.getClicks(buttonId, dateMs).count();
+        return depot.buttons.getClicks(buttonId, dateMs);
+    },
+
+    getTodayValue: function(buttonId) {
+        var value = 0;
+        depot.buttons.getTodayClicks(buttonId).forEach(
+            function(click) {
+                value += _.isNumber(click.value) ? click.value : 0;
+            });
+        return value;
+    },
+
+    getTodayCount: function(buttonId) {
+        return depot.buttons.getTodayClicks(buttonId).count();
     },
 
     update: function(id, options) {

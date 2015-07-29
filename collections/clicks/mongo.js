@@ -20,6 +20,10 @@ var lib = {
         return Clicks.find({_id: {$in: ids}});
     },
 
+    getClick: function(clickId) {
+        return Clicks.findOne(clickId);
+    },
+
     getByButtonId: function(buttonId, opt_minDateMs, opt_maxDateMs) {
         var opt = {};
         if (opt_minDateMs || opt_maxDateMs) {
@@ -32,16 +36,16 @@ var lib = {
         return Clicks.find(opt, {sort: {dateTimeMs: -1}});
     },
 
-    remove: function(id) {
-        check(id, String);
+    remove: function(clickId) {
+        check(clickId, String);
 
-        Clicks.remove(id);
+        Clicks.remove(clickId);
     },
 
-    update: function(id, options) {
-        check(id, String);
+    update: function(clickId, options) {
+        check(clickId, String);
 
-        Clicks.update(id, {
+        Clicks.update(clickId, {
             $set: options
         });
     }

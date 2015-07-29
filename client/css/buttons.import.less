@@ -76,7 +76,28 @@ ng-timer-button {
             background-color: rgb(255, 92, 185);
             text-align: center;
             padding: 0 5px;
-            z-index: 9999;
+            z-index: 3;
+        }
+
+        .remove {
+            position: absolute;
+            left: -5px;
+            top: -10px;
+            font-size: 20px;
+            min-height: 25px;
+            line-height: 25px;
+            min-width: 25px;
+            border-radius: 50px;
+            background-color: rgba(166, 166, 166, 0.99);
+            text-align: center;
+            padding: 0 5px;
+            z-index: 3;
+
+            &:after {
+                font-family: "Ionicons";
+                content: "\f129";
+                color: rgba(88, 88, 88, 0.99);
+            }
         }
 
         .label {

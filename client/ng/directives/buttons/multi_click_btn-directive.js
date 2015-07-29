@@ -14,7 +14,11 @@ app.controls.directive('ngMultiClickButton', ['$rootScope', function($rootScope)
                     <input type="checkbox" ng-checked="$ctrl.checked"\
                         ng-if="!$ctrl.editMode"\
                         ng-disabled="!$ctrl.enabled">\
-                    <div ng-show="$ctrl.model.count" class="count">\
+                    <div ng-show="$ctrl.editMode" class="remove"\
+                        ng-click="$ctrl.archive($event)">\
+                    </div>\
+                    <div ng-show="$ctrl.model.count && !$ctrl.editMode"\
+                        class="count">\
                         {{$ctrl.model.count}}\
                     </div>\
                     <div class="button">\

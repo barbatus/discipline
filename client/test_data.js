@@ -12,6 +12,7 @@ Meteor.startup(function() {
         var bits = opt_sendAlerts ? [consts.BtnBits.SEND_ALERTS] : [];
 
         var btnId = depot.buttons.create({
+            archived: false,
             name: name,
             type: type,
             iconId: withIcon ? icon._id : null,
@@ -24,6 +25,7 @@ Meteor.startup(function() {
         if (oldClicks) {
             for (var i = 0; i < oldClicks; i++) {
                 var days = (opt_daysPeriod * Math.random()) << 0;
+                var value = 0;
                 insertClick(btnId, 'days', days);
             }
         }
@@ -38,7 +40,8 @@ Meteor.startup(function() {
     function insertClick(btnId, timePart, timeVal) {
         var dateTime = moment.utc().subtract(timeVal, timePart);
         depot.clicks.create(btnId, {
-            dateTimeMs: dateTime.valueOf()
+            dateTimeMs: dateTime.valueOf(),
+            value: (Math.random() * 100) >> 0
         });
     }
 

@@ -9,12 +9,16 @@
         </button>
     </ion-header-bar>
     <ion-content has-header="true" scroll="true">
-        <ng-include class="btn-step btn-icon-step"
+        <ng-include class="btn-step btn-profile-step"
             ng-class="{active: ctrl.checkActive(0), prev: ctrl.checkPrev(0)}"
+            src="'client/views/buttons/btn_clicks.ng.html'">
+        </ng-include>
+        <ng-include class="btn-step btn-icon-step"
+            ng-class="{active: ctrl.checkActive(1), prev: ctrl.checkPrev(1)}"
             src="'client/views/buttons/btn_icons.ng.html'">
         </ng-include>
         <ng-include class="btn-step btn-cfg-step"
-            ng-class="{active: ctrl.checkActive(1), prev: ctrl.checkPrev(1)}"
+            ng-class="{active: ctrl.checkActive(2), prev: ctrl.checkPrev(2)}"
             src="'client/views/buttons/btn_config.ng.html'">
         </ng-include>
     </ion-content>

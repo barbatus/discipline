@@ -18,7 +18,7 @@ class CfgStep extends DlgStep {
     }
 
     checkValid(btnModel) {
-        return !!(btnModel.cfg.iconId || btnModel.cfg.name);
+        return !!(btnModel.iconId || btnModel.name);
     }
 };
 
@@ -96,7 +96,8 @@ class DlgNewBtnCtrl_ {
 
 class DlgEditBtnCtrl_ extends DlgNewBtnCtrl_ {
     get steps() {
-        return [new DlgStep('Button icon'),
+        return [new DlgStep('Button clicks'),
+                new DlgStep('Button icon'),
                 new CfgStep('Settings')];
     }
 };
